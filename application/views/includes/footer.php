@@ -10,11 +10,11 @@
         <script>
 
 
-            $('form#addPaciente').on( 'submit', function (e) { 
+            $('form#addCliente').on( 'submit', function (e) { 
                 e.preventDefault();
                 var formData = new FormData(this);
                 $.ajax({
-                    url: '<?= BASE_URL ?>landpage/addPaciente',
+                    url: '<?= BASE_URL ?>landpage/addCliente',
                     type: "POST",
                     processData: false,
                     contentType: false,
@@ -53,11 +53,11 @@
                 });
             });
     
-            $('form#editPaciente').on( 'submit', function (e) { 
+            $('form#editCliente').on( 'submit', function (e) { 
                     e.preventDefault();
                     var formData = new FormData(this);
                     $.ajax({
-                    url: '<?= BASE_URL ?>landpage/editPaciente',
+                    url: '<?= BASE_URL ?>landpage/editCliente',
                     type: "POST",
                     processData: false,
                     contentType: false,
@@ -106,7 +106,7 @@
                         Sim: function () {
                         $.ajax({
                                 type: "POST",
-                                url: "<?= BASE_URL ?>landpage/deletePaciente",
+                                url: "<?= BASE_URL ?>landpage/deleteCliente",
                                 data: {id:id},
                                 success: function(msg){
                                 element.closest('tr').remove();
@@ -123,20 +123,23 @@
                 let id=element.closest('tr').attr('idPac');
             
                 let nome=       element.closest('tr').find('td.td-nome').text();
-                let cns=        element.closest('tr').find('td.td-CNS').text();
-                let cpf=        element.closest('tr').find('td.td-CPF').text();
-                let datanasc=   element.closest('tr').find('td.td-data_nasc').text();
-                let mae=        element.closest('tr').find('td.td-nome_mae').text();
-                let endereco=   element.closest('tr').find('td.td-endereco').text();
+                let telefone=        element.closest('tr').find('td.td-telefone').text();
+                let estado=        element.closest('tr').find('td.td-estado').text();
+                let cidade=        element.closest('tr').find('td.td-cidade').text();
+                let bairro=   element.closest('tr').find('td.td-bairro').text();
+                let numero=   element.closest('tr').find('td.td-numero').text();
+                let rua=   element.closest('tr').find('td.td-rua').text();
                 let image=      element.closest('tr').find('td.td-img img').attr("src");
             
                 $('#IdInput').val(id);
                 $('#nomeInput').val(nome);
-                $('#data_nascInput').val(datanasc);
-                $('#CPFInput').val(cpf);
-                $('#CNSInput').val(cns);
-                $('#nome_maeInput').val(mae);
-                $('#enderecoInput').val(endereco);
+                $('#telefoneInput').val(telefone);
+                $('#cepInput').val(estado);
+                $('#estadoInput').val(estado);
+                $('#cidadeInput').val(cidade);
+                $('#bairroInput').val(bairro);
+                $('#ruaInput').val(rua);
+                $('#numeroInput').val(numero);
                 $('#fotoInputHiden').val(image.replace('<?= BASE_URL ?>',''));
                 $('#imgspace2').attr("src",image);
                 $('#editModal').modal('show');

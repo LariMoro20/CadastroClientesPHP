@@ -1,43 +1,42 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class db_model extends CI_Model {
+class clientes_model extends CI_Model {
 	public function __construct()	{
 		parent::__construct();
 		if(isset($_POST)){ array_walk_recursive($_POST, function(&$v, $k) {$v = (utf8_decode($v));}); }
 		if(isset($_GET)){ array_walk_recursive($_GET, function(&$v, $k) {$v = mysqli_real_escape_string($this->db->conn_id,utf8_decode($v));}); }
 	}
 
-	public function getPacientes($id=false){
+	public function getClientes($id=false){
 		if($id){
 			$this->db->where('Id', $id);
 		}
-		$pacientes = $this->db->get('pacientes')->result();
-		foreach ($pacientes as $pac) {
-			$datanasc = new DateTime($pac->data_nasc);
-			$pac->data_nasc= $datanasc->format('d/m/Y');
-		}
-		return $pacientes;
+		$Clientes = $this->db->get('clientes')->result();
+		
+		return $Clientes;
 		
 		
 	}
 	
 
+
 	
 
-	public function addPacientes($POST){
-			$valida=$this->db_model->validaDados($POST);
-			if($valida['status']){
-			$dataNasc = DateTime::createFromFormat('d/m/Y', $POST['data_nasc']);
+	public function addClientes($POST){
+			//$valida=$this->clientes_model->validaDados($POST);
+			//if($valida['status']){
 			$data = array(
 				'nome' => utf8_encode($POST['nome']),
-				'nome_mae' => utf8_encode($POST['nome_mae']),
-				'data_nasc' => $dataNasc->format('Y-m-d'),
-				'CPF' => $POST['CPF'],
-				'CNS' => $POST['CNS'],
-				'endereco' => utf8_encode($POST['endereco']),
+				'telefone' => utf8_encode($POST['telefone']),
+				'bairro' => utf8_encode($POST['bairro']),
+				'rua' => utf8_encode($POST['rua']),
+				'numero' => utf8_encode($POST['numero']),
+				'cidade' => utf8_encode($POST['cidade']),
+				'estado' => utf8_encode($POST['estado']),
+				'endereco' => utf8_encode(@$POST['endereco']),
 				);
 
-			if($this->db->insert('pacientes', $data)){
+			if($this->db->insert('clientes', $data)){
 				$Id = $this->db->insert_id();
 				$retorno['msg']='Adicionado com sucesso!';
 				$retorno['status']=true;
@@ -48,29 +47,25 @@ class db_model extends CI_Model {
 				$retorno['status']=false;
 				$retorno['id']=null;
 			}
-		}else{
-			$retorno['msg']=$valida['msg'];
-			$retorno['status']=false;
-			$retorno['id']=null;
-		}
+		//}else{
+		//	$retorno['msg']=$valida['msg'];
+		//	$retorno['status']=false;
+		//	$retorno['id']=null;
+		//}
 		
 		return json_encode($retorno);
 	}
 	
-	public function updatePacientes($POST){
-		$valida=$this->db_model->validaDados($POST);
+	public function updateClientes($POST){
+		$valida=$this->clientes_model->validaDados($POST);
 		if($valida['status']){
 			$dataNasc = DateTime::createFromFormat('d/m/Y', $POST['data_nasc']);
 			$data = array(
 				'nome' => utf8_encode($POST['nome']),
-				'nome_mae' => utf8_encode($POST['nome_mae']),
-				'data_nasc' => $dataNasc->format('Y-m-d'),
-				'CPF' => $POST['CPF'],
-				'CNS' => $POST['CNS'],
 				'endereco' => utf8_encode($POST['endereco']),
 				);
 			$this->db->where('Id', $POST['Id']);
-			if($this->db->update('pacientes', $data)){
+			if($this->db->update('clientes', $data)){
 				$retorno['msg']='Sucesso!';
 				$retorno['status']=true;
 				$retorno['id']=$POST['Id'];
@@ -88,19 +83,19 @@ class db_model extends CI_Model {
 			return json_encode($retorno);
 
 	}
-	public function deletePaciente($id){
+	public function deleteCliente($id){
 		if($id){
 			$id=$id['id'];
 			
-			$paciente=$this->db_model->getPacientes($id);
-			$foto=$paciente[0]->foto;
+			$cliente=$this->clientes_model->getClientes($id);
+			$foto=$cliente[0]->foto;
 			
 			$path = dirname(dirname(dirname(__FILE__)));
 			$path=$path.'/'.$foto;
 		
 			unlink($path);
 			$this->db->where('Id', $id);
-        	if($this->db->delete('pacientes')){
+        	if($this->db->delete('clientes')){
 				$retorno['msg']='Deletado com sucesso!';
 				$retorno['status']=true;
 			}else{
@@ -109,7 +104,7 @@ class db_model extends CI_Model {
 			}
 			
 		}else{
-			$retorno['msg']='Paciente não informado!';
+			$retorno['msg']='Cliente não informado!';
 			$retorno['status']=false;
 		}
 		return json_encode($retorno);
@@ -120,13 +115,13 @@ class db_model extends CI_Model {
 			'foto' 	=> $path,
 		);
 		$this->db->where('Id', $id);
-		if($this->db->update('pacientes', $data)){
+		if($this->db->update('clientes', $data)){
 			$retorno['status'] 	= true;
-			$retorno['msg']		= 'Paciente salvo com sucesso!';
+			$retorno['msg']		= 'Cliente salvo com sucesso!';
 		}
 		else{
 			$retorno['status'] 	= false;
-			$retorno['msg']		= 'Erro ao adicionar arquivo ao paciente, mas paciente salvo!';
+			$retorno['msg']		= 'Erro ao adicionar arquivo ao cliente, mas cliente salvo!';
 		}
 		return json_encode($retorno);
 
@@ -137,8 +132,8 @@ class db_model extends CI_Model {
 		$retorno['status'] 	= true;
 		$retorno['msg']		= 'Dados corretos!';
 
-		if($this->db_model->validaData($dados['data_nasc'], 'd/m/Y')){
-			if($this->db_model->validaCPF($dados['CPF'])){
+		if($this->clientes_model->validaData($dados['data_nasc'], 'd/m/Y')){
+			if($this->clientes_model->validaCPF($dados['CPF'])){
 			}else{
 				$retorno['status'] 	= false;
 				$retorno['msg']		= 'CPF incorreto!';

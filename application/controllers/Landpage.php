@@ -5,13 +5,13 @@ class Landpage extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('db_model');
+		$this->load->model('clientes_model');
 	}
 
 	public function index(){
 		$data = array(
 			'page_title'=> 'Inicial',
-			'pacientes'=>$this->db_model->getPacientes(),
+			'cliente'=>$this->clientes_model->getClientes(),
 			);
 		$this->load->view('includes/design',$data);
 		$this->load->view('includes/header');
@@ -19,9 +19,9 @@ class Landpage extends CI_Controller {
 		$this->load->view('includes/footer');
 	}
 
-	public function addPaciente(){
+	public function addCliente(){
 		if(isset($_FILES['foto']) && $_FILES['foto']['name']!=''){
-			$dados= $this->db_model->addPacientes($this->input->post());
+			$dados= $this->clientes_model->addClientes($this->input->post());
 			$id=json_decode($dados, true);
 			$id=$id['id'];
 			$imagem    = $_FILES['foto'];
@@ -44,17 +44,17 @@ class Landpage extends CI_Controller {
 			$this->load->library('upload');
 			$this->upload->initialize($configuracao);
 			if ($this->upload->do_upload('foto'))
-				echo $this->db_model->addArquivo($id, $path.$nomeaqr);
+				echo $this->clientes_model->addArquivo($id, $path.$nomeaqr);
 		}else{
-			echo $this->db_model->addPacientes($this->input->post());
+			echo $this->clientes_model->addClientes($this->input->post());
 
 		
 		}
 	}
 
-	public function editPaciente(){
+	public function editCliente(){
 		
-		$dados= $this->db_model->updatePacientes($this->input->post());
+		$dados= $this->clientes_model->updateClientes($this->input->post());
 		$array=json_decode($dados, true);
 		$id=$array['id'];
 		if($array['status']==false){
@@ -84,15 +84,15 @@ class Landpage extends CI_Controller {
 				$this->load->library('upload');
 				$this->upload->initialize($configuracao);
 				if ($this->upload->do_upload('foto')){
-					echo $this->db_model->addArquivo($id, $path.$nomeaqr);
+					echo $this->clientes_model->addArquivo($id, $path.$nomeaqr);
 				}
 
 			}
 		}
 	}
 
-	public function deletePaciente(){
-		echo $this->db_model->deletePaciente($this->input->post());
+	public function deleteCliente(){
+		echo $this->clientes_model->deleteCliente($this->input->post());
 	}
 
 

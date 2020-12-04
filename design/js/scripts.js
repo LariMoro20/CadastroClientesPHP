@@ -1,5 +1,5 @@
 $(document).ready(function() {
- $('.datanasc').mask('00/00/0000');
+ $('.telefone').mask('(00)00000-0000');
  $('.CNS').mask('000 0000 0000 0000');
  $(document).ready(function() {
   $('#pactable').DataTable({

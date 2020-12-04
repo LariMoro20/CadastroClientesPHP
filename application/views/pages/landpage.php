@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12 text-center">
-      <h1>Lista de pacientes</h1>
+      <h1>Lista de cliente</h1>
     </div>
     <div class="col-md-12 text-center margin-bt20">
       <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#addModal">
@@ -15,25 +15,29 @@
           <tr>
             <th scope="col">Foto</th>
             <th scope="col">Nome</th>
-            <th scope="col">CPF</th>
-            <th scope="col">CNS</th>
-            <th scope="col">Data Nasc.</th>
-            <th scope="col">Nome da mãe</th>
-            <th scope="col">Endereço</th>
+            <th scope="col">Telefone</th>
+
+            <th scope="col">Estado</th>
+            <th scope="col">Cidade</th>
+            <th scope="col">Bairro</th>
+            <th scope="col">Rua</th>
+            <th scope="col">Numero</th>       
             <th scope="col">Remover</th>
             <th scope="col">Editar</th>
           </tr>
         </thead>
         <tbody>
-          <?php foreach ($pacientes as $pac) { ?>
+          <?php foreach ($cliente as $pac) { ?>
           <tr idPac='<?=$pac->Id ?>'>
             <td class='td-img'><img class='img-pac' src='<?= BASE_URL.$pac->foto ?>' ></td>
             <td class='td-nome'><?= $pac->nome ?></td>
-            <td class='td-CPF'><?= $pac->CPF ?></td>
-            <td class='td-CNS'><?= $pac->CNS ?></td>
-            <td class='td-data_nasc'><?= $pac->data_nasc ?></td>
-            <td class='td-nome_mae'><?= $pac->nome_mae ?></td>
-            <td class='td-endereco'><?= $pac->endereco ?></td>
+            <td class='td-telefone'><?= $pac->telefone ?></td>
+
+            <td class='td-estado'><?= $pac->estado ?></td>
+            <td class='td-cidade'><?= $pac->cidade ?></td>
+            <td class='td-bairro'><?= $pac->bairro ?></td>
+            <td class='td-rua'><?= $pac->rua ?></td>
+            <td class='td-numero'><?= $pac->numero ?></td>
             <td><a class='btnremovepac' idPac='<?=$pac->Id ?>' href="#."><i class="fa fa-window-close"></i></a></td>
             <td><a class='btneditpac' href="#." ><i class="fa fa-pencil-square-o"></i></a></td>
           </tr>
@@ -45,58 +49,65 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="addModalLabel">Adicionar Paciente</h5>
+              <h5 class="modal-title" id="addModalLabel">Adicionar Cliente</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form  id="addPaciente" class='addPaciente' action='#' method='post'  enctype='multipart/form-data' >
+            <form  id="addCliente" class='addCliente' action='#' method='post'  enctype='multipart/form-data' >
 
               <div class="modal-body">
                   <div class="row">
                     <div class="form-group col-md-6">
-                      <label for="Nome">Nome Completo*</label>
-                      <input type="text" autocomplete="off" class="form-control" name='nome' id="Nome" placeholder="Nome do Paciente" required>
+                      <label for="Nome">Nome*</label>
+                      <input type="text" aria-describedby="nomeHelp"  autocomplete="off" class="form-control" name='nome' id="Nome" placeholder="" required>
+                      
+                      <small id="nomeHelp" class="form-text text-muted">Nome Completo</small>
                     </div>
 
                     <div class="form-group col-md-6">
-                      <label for="data_nasc">Data de nascimento*</label>
-                      <input type="text" autocomplete="off" name='data_nasc' class="form-control datanasc" id="data_nasc" placeholder="Data de nascimento" required>
-                      <small id="cepHelp" class="form-text text-muted">Exemplo: (00/00/0000)</small>
+                      <label for="data_nasc">Telefone*</label>
+                      <input type="text" autocomplete="off" aria-describedby="telefoneHelp" name='telefone' class="form-control telefone" id="telefone" placeholder="" required>
+                      <small id="telefoneHelp" class="form-text text-muted">Exemplo: (00) 00000-0000</small>
                     </div>
 
-                    <div class="form-group col-md-6">
-                      <label for="CPF">CPF*</label>
-                      <input type="text" aria-describedby="cpfHelp" onkeydown="javascript: fMasc( this, mCPF );" maxlength="14" autocomplete="off" name='CPF' class="form-control" id="CPF" placeholder="CPF" required>
-                      <small id="cpfHelp" class="form-text text-muted">Exemplo: (000.000.000-00)</small>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                      <label for="CNS">CNS*</label>
-                      <input type="text" autocomplete="off" name='CNS' class="form-control CNS" id="CNS" placeholder="CNS" required>
-                      <small id="CNSHelp" class="form-text text-muted">Exemplo: (000 0000 0000 0000)</small>
-
-                    </div>
-
-                    <div class="form-group col-md-12">
-                      <label for="nome_mae">Nome da mãe*</label>
-                      <input type="text" autocomplete="off" name='nome_mae' class="form-control" id="nome_mae" placeholder="Nome da mãe" required>
-                    </div>
 
                     <div class="form-group col-md-6">
                       <label for="data_nasc">Digite o CEP</label>
                       <input type="text"  name='cep' class="form-control cep" id="cep" placeholder="cep">
                       <small id="cepHelp" class="form-text text-muted">Somente números!</small>
                     </div>
-
                     <div class="form-group col-md-6">
-                      <label for="endereco">Endereço Completo*</label>
-                      <input type="text" autocomplete="off" required name='endereco' class="form-control" aria-describedby="enderecoHelp" id="endereco" placeholder="Endereço" required>
-                      <small id="enderecoHelp" class="form-text text-muted">Exemplo: (Sua rua - bairro, Cidade - UF)</small>
+                      <label for="estado">Estado*</label>
+                      <input type="text" aria-describedby="estadoHelp" name='estado' class="form-control" id="estado" placeholder="" required>
+                      <small id="estadoHelp" class="form-text text-muted">Informe seu estado</small>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="cidade">Cidade*</label>
+                      <input type="text" aria-describedby="cidadeHelp" name='cidade' class="form-control" id="cidade" placeholder="" required>
+                      <small id="cidadeHelp" class="form-text text-muted">Informe sua cidade</small>
+                    </div>
+                   
+                    <div class="form-group col-md-6">
+                      <label for="bairro">Bairro*</label>
+                      <input type="text" aria-describedby="bairroHelp" name='bairro' class="form-control" id="bairro" placeholder="" required>
+                      <small id="bairroHelp" class="form-text text-muted">Informe seu bairro</small>
+                    </div>
+                    <div class="form-group col-md-8">
+                      <label for="rua">Rua*</label>
+                      <input type="text" aria-describedby="ruaHelp" name='rua' class="form-control" id="rua" placeholder="" required>
+                      <small id="ruaHelp" class="form-text text-muted">Informe sua rua</small>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="rua">Numero*</label>
+                      <input type="text" aria-describedby="ruaHelp" name='numero' class="form-control" id="rua" placeholder="" required>
+                      <small id="ruaHelp" class="form-text text-muted">Informe sua rua</small>
                     </div>
 
+
+
                     <div class="form-group col-md-12 text-center"><hr>
-                      <label for="foto">Foto do paciente</label>
+                      <label for="foto">Foto do cliente</label>
                       <input type="file" aria-describedby="fotoHelp" autocomplete="off"  name='foto' class="form-control" id="foto" placeholder="Foto do paciente"  onchange="document.getElementById('imgspace').src = window.URL.createObjectURL(this.files[0])">
                       <small id="fotoHelp" class="form-text text-muted">Favor escolher uma foto de rosto limpo, para fácil identificação</small>
                       <img id="imgspace"  width="200" height="200" />
@@ -119,56 +130,67 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="editModalLabel">Editar Paciente</h5>
+              <h5 class="modal-title" id="editModalLabel">Editar Cliente</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form  id="editPaciente" class='editPaciente' action='#' method='post'  enctype='multipart/form-data' >
+            <form  id="editCliente" class='editCliente' action='#' method='post'  enctype='multipart/form-data' >
             <input type="hidden" class="form-control" name='Id' id="IdInput">
 
               <div class="modal-body">
                   <div class="row">
+                   
+                   
+                   
                     <div class="form-group col-md-6">
                       <label for="Nome">Nome completo*</label>
-                      <input type="text" class="form-control" name='nome' id="nomeInput" placeholder="Nome do Paciente" required>
+                      <input type="text" class="form-control" name='nome' id="nomeInput" placeholder="Nome do Cliente" required>
                     </div>
+
+
 
                     <div class="form-group col-md-6">
-                      <label for="data_nasc">Data de nascimento*</label>
-                      <input type="text" name='data_nasc' class="form-control datanasc" id="data_nascInput" placeholder="Data de nascimento" required>
+                      <label for="data_nasc">Telefone*</label>
+                      <input type="text" autocomplete="off" id="telefoneInput" aria-describedby="telefoneHelp" name='telefone' class="form-control telefone" placeholder="" required>
+                      <small id="telefoneHelp" class="form-text text-muted">Exemplo: (00) 00000-0000</small>
                     </div>
 
-                    <div class="form-group col-md-6">
-                      <label for="CPF">CPF*</label>
-                      <input type="text" name='CPF' class="form-control" id="CPFInput" placeholder="CPF" required>
-                      <small id="cpfHelp" class="form-text text-muted">Exemplo: (000.000.000-00)</small>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                      <label for="CNS">CNS*</label>
-                      <input type="text" name='CNS' class="form-control CNS" id="CNSInput " placeholder="CNS" required>
-                      <small id="CNSHelp" class="form-text text-muted">Exemplo: (000 0000 0000 0000)</small>
-
-                    
-                    </div>
-
-                    <div class="form-group col-md-12">
-                      <label for="nome_mae">Nome da mãe*</label>
-                      <input type="text" name='nome_mae' class="form-control" id="nome_maeInput" placeholder="Nome da mãe" required>
-                    </div>
 
                     <div class="form-group col-md-6">
                       <label for="data_nasc">Digite o CEP</label>
-                      <input type="text"  autocomplete="off" name='cep2' class="form-control cep" id="cep" placeholder="cep">
+                      <input type="text"  name='cep' id="cepInput"  class="form-control cep" id="cep" placeholder="cep">
                       <small id="cepHelp" class="form-text text-muted">Somente números!</small>
                     </div>
-
                     <div class="form-group col-md-6">
-                      <label for="endereco">Endereço Completo*</label> 
-                      <input type="text" required name='endereco' class="form-control" id="enderecoInput" placeholder="Endereço" required>
-                      <small id="enderecoHelp" class="form-text text-muted">Exemplo: (Sua rua - bairro, Cidade - UF)</small>
+                      <label for="estado">Estado*</label>
+                      <input type="text" aria-describedby="estadoHelp" id="estadoInput" name='estado' class="form-control" required>
+                      <small id="estadoHelp" class="form-text text-muted">Informe seu estado</small>
                     </div>
+                    <div class="form-group col-md-6">
+                      <label for="cidade">Cidade*</label>
+                      <input type="text" aria-describedby="cidadeHelp" id="cidadeInput" name='cidade' class="form-control"  required>
+                      <small id="cidadeHelp" class="form-text text-muted">Informe sua cidade</small>
+                    </div>
+                   
+                    <div class="form-group col-md-6">
+                      <label for="bairro">Bairro*</label>
+                      <input type="text" aria-describedby="bairroHelp" id="bairroInput" name='bairro' class="form-control" required>
+                      <small id="bairroHelp" class="form-text text-muted">Informe seu bairro</small>
+                    </div>
+                    <div class="form-group col-md-8">
+                      <label for="rua">Rua*</label>
+                      <input type="text" aria-describedby="ruaHelp" name='rua' class="form-control" id="ruaInput" placeholder="" required>
+                      <small id="ruaHelp" class="form-text text-muted">Informe sua rua</small>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="rua">Numero*</label>
+                      <input type="text" aria-describedby="ruaHelp"  id="numeroInput" name='numero' class="form-control"  placeholder="" required>
+                      <small id="ruaHelp" class="form-text text-muted">Informe sua rua</small>
+                    </div>
+
+                
+
 
                     <div class="form-group col-md-12 text-center"><hr>
                       <label for="foto">Foto do paciente</label>

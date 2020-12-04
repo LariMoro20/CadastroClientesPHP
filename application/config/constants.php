@@ -85,9 +85,9 @@ defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automat
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 // Site customs
-defined('SITE_NAME') or define('SITE_NAME','Cadastro OM30');
-defined('SITE_DESC') or define('SITE_DESC','Cadastro de pacientes');
+defined('SITE_NAME') or define('SITE_NAME','Cadastro Clientes');
+defined('SITE_DESC') or define('SITE_DESC','Cadastro de clientes');
 
 // Custom constants 
-defined('BASE_URL') or define('BASE_URL','https://localhost/TesteOM/');
+defined('BASE_URL') or define('BASE_URL','https://localhost/CadastroClientesPHP/');
 defined('DESIGN_PATH') or define('DESIGN_PATH',BASE_URL.'design/');
