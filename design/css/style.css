@@ -1,0 +1,41 @@
+html, body {
+    height: 100%;
+  }
+.container{
+    margin-bottom: 200px;
+}
+.img-pac{
+    max-width: 70%;
+}
+.td-img{
+   max-width: 57px;
+}
+.cancelbtn{
+  width: 100%;
+ }
+.modal-dialog {
+    max-width: 860px;
+    margin: 1.75rem auto;
+}
+.margin-bt20{
+    margin-bottom: 20px;
+}
+
+.header-top{
+    background-color: #77021f;
+}
+.logo{
+    max-width: 100px;
+}
+.dataTable {
+    max-width: 100%;
+}
+.footer{
+    padding: 10px;
+    background-color: black;
+    color:white;
+    clear:both;
+}
+.footer a{
+    color:white;
+}
