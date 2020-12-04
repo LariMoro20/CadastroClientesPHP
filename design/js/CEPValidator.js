@@ -2,8 +2,8 @@ $(document).ready(function() {
 
             function limpa_formulário_cep() {
                 // Limpa valores do formulário de cep.
-                $("#endereco").val("");
                 $("#enderecoInput").val("");
+                
             }
             
             //Quando o campo cep perde o foco.
@@ -22,18 +22,31 @@ $(document).ready(function() {
                     if(validacep.test(cep)) {
 
                         //Preenche o campo com "..." enquanto consulta webservice.
-                        $("#endereco").val("...");
-                        $("#enderecoInput").val("...");
-                        
+                                $("#estado").val("...");;
+                                $("#cidade").val("...");
+                                $("#bairro").val("...");
+                                $("#rua").val("...");
+
+                                $("#estadoInput").val("...");;
+                                $("#cidadeInput").val("...");
+                                $("#bairroInput").val("...");
+                                $("#ruaInput").val("...");
                         //Consulta o webservice viacep.com.br/
                         $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
 
                             if (!("erro" in dados)) {
                                 //Atualiza o campo com os valores da consulta.
-                                let endereco='Rua '+dados.logradouro+' - Bairro '+dados.bairro+', '+dados.localidade+' - '+dados.uf;
-                                $("#endereco").val(endereco);
-                                $("#enderecoInput").val(endereco);
-                                
+                                $("#estado").val(dados.uf);
+                                $("#cidade").val(dados.localidade);
+                                $("#bairro").val(dados.bairro);
+                                $("#rua").val(dados.logradouro);
+
+                                $("#estadoInput").val(dados.uf);
+                                $("#cidadeInput").val(dados.localidade);
+                                $("#bairroInput").val(dados.bairro);
+                                $("#ruaInput").val(dados.logradouro);
+
+
                             } //end if.
                             else {
                                 //CEP pesquisado não foi encontrado.

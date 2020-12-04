@@ -89,5 +89,5 @@ defined('SITE_NAME') or define('SITE_NAME','Cadastro Clientes');
 defined('SITE_DESC') or define('SITE_DESC','Cadastro de clientes');
 
 // Custom constants 
-defined('BASE_URL') or define('BASE_URL','https://localhost/CadastroClientesPHP/');
+defined('BASE_URL') or define('BASE_URL','http://localhost/CadastroClientesPHP/');
 defined('DESIGN_PATH') or define('DESIGN_PATH',BASE_URL.'design/');

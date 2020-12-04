@@ -57,12 +57,17 @@ class clientes_model extends CI_Model {
 	}
 	
 	public function updateClientes($POST){
-		$valida=$this->clientes_model->validaDados($POST);
-		if($valida['status']){
-			$dataNasc = DateTime::createFromFormat('d/m/Y', $POST['data_nasc']);
+		//$valida=$this->clientes_model->validaDados($POST);
+		//if($valida['status']){
 			$data = array(
 				'nome' => utf8_encode($POST['nome']),
-				'endereco' => utf8_encode($POST['endereco']),
+				'telefone' => utf8_encode($POST['telefone']),
+				'bairro' => utf8_encode($POST['bairro']),
+				'rua' => utf8_encode($POST['rua']),
+				'numero' => utf8_encode($POST['numero']),
+				'cidade' => utf8_encode($POST['cidade']),
+				'estado' => utf8_encode($POST['estado']),
+				'endereco' => utf8_encode(@$POST['endereco']),
 				);
 			$this->db->where('Id', $POST['Id']);
 			if($this->db->update('clientes', $data)){
@@ -75,11 +80,11 @@ class clientes_model extends CI_Model {
 				$retorno['status']=false;
 				$retorno['id']=null;
 			}
-		}else{
-				$retorno['msg']=$valida['msg'];
-				$retorno['status']=false;
-				$retorno['id']=null;
-			}
+		//}else{
+		//		$retorno['msg']=$valida['msg'];
+		//		$retorno['status']=false;
+			//	$retorno['id']=null;
+			//}
 			return json_encode($retorno);
 
 	}

@@ -14,7 +14,7 @@
                 e.preventDefault();
                 var formData = new FormData(this);
                 $.ajax({
-                    url: '<?= BASE_URL ?>landpage/addCliente',
+                    url: '<?= BASE_URL ?>clientes/addCliente',
                     type: "POST",
                     processData: false,
                     contentType: false,
@@ -57,7 +57,7 @@
                     e.preventDefault();
                     var formData = new FormData(this);
                     $.ajax({
-                    url: '<?= BASE_URL ?>landpage/editCliente',
+                    url: '<?= BASE_URL ?>clientes/editCliente',
                     type: "POST",
                     processData: false,
                     contentType: false,
@@ -106,7 +106,7 @@
                         Sim: function () {
                         $.ajax({
                                 type: "POST",
-                                url: "<?= BASE_URL ?>landpage/deleteCliente",
+                                url: "<?= BASE_URL ?>clientes/deleteCliente",
                                 data: {id:id},
                                 success: function(msg){
                                 element.closest('tr').remove();
