@@ -9,11 +9,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="shortcut icon" type="image/x-icon" href="<?= DESIGN_PATH ?>img/logo.png">
     
-    <meta name="description" content="Projeto de cadastro de pacientes">
+    <meta name="description" content="Projeto de cadastro de clientes">
     <meta name="author" content="Larissa Moro de Souza dos Santos">
-    <meta name="keywords" content="saude, medicina, empresa">
+    <meta name="keywords" content="vendas, localização, market, food, delivery">
     
-    <meta property="og:description" content="Projeto de cadastro de pacientes" />
+    <meta property="og:description" content="Projeto de cadastro de clientes" />
     <meta property="og:title" content="<?= SITE_NAME ?>" />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:image" content="<?= DESIGN_PATH ?>img/logo.png" />
