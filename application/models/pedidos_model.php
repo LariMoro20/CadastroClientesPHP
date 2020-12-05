@@ -19,15 +19,15 @@ class pedidos_model extends CI_Model {
 	
 
 	public function addPedidos($POST){
-			$valida=$this->db_model->validaDados($POST);
-			if($valida['status']){
+		//	$valida=$this->pedidos_model->validaDados($POST);
+			//if($valida['status']){
 			$data_pedido = DateTime::createFromFormat('d/m/Y', $POST['data_pedido']);
 			$data = array(
-				'id_cliente' => utf8_encode($POST['nome']),
+				'id_cliente' => utf8_encode($POST['id_cliente']),
 				'status' => utf8_encode($POST['status']),
 				'data_pedido' => $data_pedido->format('Y-m-d'),
 				'valor' => $POST['valor'],
-				'descricao' => $POST['descricao']
+				'descricao_pedido' => $POST['descricao']
 				);
 
 			if($this->db->insert('pedidos', $data)){
@@ -41,11 +41,11 @@ class pedidos_model extends CI_Model {
 				$retorno['status']=false;
 				$retorno['id']=null;
 			}
-		}else{
-			$retorno['msg']=$valida['msg'];
-			$retorno['status']=false;
-			$retorno['id']=null;
-		}
+	//}else{
+		//	$retorno['msg']=$valida['msg'];
+		//	$retorno['status']=false;
+		//	$retorno['id']=null;
+		//}
 		
 		return json_encode($retorno);
 	}
@@ -53,11 +53,11 @@ class pedidos_model extends CI_Model {
 	public function updatePedidos($POST){
 			$data_pedido = DateTime::createFromFormat('d/m/Y', $POST['data_pedido']);
 			$data = array(
-				'id_cliente' => utf8_encode($POST['nome']),
+				'id_cliente' => utf8_encode($POST['id_cliente']),
 				'status' => utf8_encode($POST['status']),
 				'data_pedido' => $data_pedido->format('Y-m-d'),
 				'valor' => $POST['valor'],
-				'descricao' => $POST['descricao']
+				'descricao_pedido' => $POST['descricao']
 				);
 
 			$this->db->where('Id', $POST['Id']);
@@ -79,7 +79,7 @@ class pedidos_model extends CI_Model {
 		if($id){
 			$id=$id['id'];
 			
-			$pedido=$this->db_model->getPedidos($id);
+			$pedido=$this->pedidos_model->getPedidos($id);
 			$foto=$pedido[0]->foto;
 			
 			$path = dirname(dirname(dirname(__FILE__)));

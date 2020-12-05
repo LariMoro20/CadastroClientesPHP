@@ -36,7 +36,7 @@
             <td class='td-bairro'><?= $cli->bairro ?></td>
             <td class='td-rua'><?= $cli->rua ?></td>
             <td class='td-numero'><?= $cli->numero ?></td>
-            <td><a class='btnremovepac' idPac='<?=$cli->Id ?>' href="#."><i class="fa fa-window-close"></i></a></td>
+            <td><a class='btnremovecli' idPac='<?=$cli->Id ?>' href="#."><i class="fa fa-window-close"></i></a></td>
             <td><a class='btneditpac' href="#." ><i class="fa fa-pencil-square-o"></i></a></td>
           </tr>
         <?php } ?>

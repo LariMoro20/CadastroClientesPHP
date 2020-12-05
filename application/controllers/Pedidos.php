@@ -6,6 +6,8 @@ class Pedidos extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('pedidos_model');
+		$this->load->library('form_validation');
+
 	}
 
 	public function index(){
@@ -20,75 +22,34 @@ class Pedidos extends CI_Controller {
 	}
 
 	public function addPedido(){
-		if(isset($_FILES['foto']) && $_FILES['foto']['name']!=''){
-			$dados= $this->pedidos_model->addPedidos($this->input->post());
-			$id=json_decode($dados, true);
-			$id=$id['id'];
-			$imagem    = $_FILES['foto'];
+			$this->form_validation->set_rules('id_cliente', 'Cliente', 'required|numeric|min_length[1]',FORM_OPTIONS);
+			$this->form_validation->set_rules('status', 'status', 'required|min_length[2]|alpha', FORM_OPTIONS);
+			$this->form_validation->set_rules('valor', 'valor', 'required|alpha_numeric|min_length[3]', FORM_OPTIONS);
+			$this->form_validation->set_rules('data_pedido', 'data do pedido', 'required|min_length[10]', FORM_OPTIONS);
+			$this->form_validation->set_rules('descricao', 'descricao', 'required|alpha_numeric_spaces|min_length[1]', FORM_OPTIONS);
+		if ($this->form_validation->run() == FALSE){
+            $errors = validation_errors();
+            echo json_encode(['error'=>$errors]);
+        }else{
 			
-			$path='arquivos/user_'.$id.'/';
-			$isso = array(" ", "(", ")", "%","&","/");
-			$aquilo   = array("_", "_", "_", "_","_","_");
-			
-			$nomeaqr = str_replace($isso, $aquilo, $imagem['name']);
-			$imagem['name']=$nomeaqr;
-			$configuracao = array(
-				'upload_path'   => $path,
-				'allowed_types' => 'gif|jpg|png|pdf|jpeg|txt|doc|docx|odt',
-				'file_name'     => $nomeaqr,
-				'max_size'      => '500000'
-			); 
-			if(!file_exists($path)){
-				mkdir($path, 0777, true);
-			}     
-			$this->load->library('upload');
-			$this->upload->initialize($configuracao);
-			if ($this->upload->do_upload('foto'))
-				echo $this->pedidos_model->addArquivo($id, $path.$nomeaqr);
-		}else{
 			echo $this->pedidos_model->addPedidos($this->input->post());
-
-		
 		}
 	}
 
 	public function editPedido(){
-		
-		$dados= $this->pedidos_model->updatePedidos($this->input->post());
-		$array=json_decode($dados, true);
-		$id=$array['id'];
-		if($array['status']==false){
-			echo $dados;
-		}else{
-			$imagem    = $_FILES['foto'];
-			if(empty($_FILES['foto']['name'])){
-				//Salvou sem alterar foto
-				echo $dados;
-			}else{
-				//Salvou e existe foto nova
-				$path='arquivos/user_'.$id.'/';
-				$isso = array(" ", "(", ")", "%","&","/");
-				$aquilo   = array("_", "_", "_", "_","_","_");
-				
-				$nomeaqr = str_replace($isso, $aquilo, $imagem['name']);
-				$imagem['name']=$nomeaqr;
-				$configuracao = array(
-					'upload_path'   => $path,
-					'allowed_types' => 'gif|jpg|png|pdf|jpeg|txt|doc|docx|odt',
-					'file_name'     => $nomeaqr,
-					'max_size'      => '500000'
-				); 
-				if(!file_exists($path)){
-					mkdir($path, 0777, true);
-				}     
-				$this->load->library('upload');
-				$this->upload->initialize($configuracao);
-				if ($this->upload->do_upload('foto')){
-					echo $this->pedidos_model->addArquivo($id, $path.$nomeaqr);
-				}
-
-			}
+			$this->form_validation->set_rules('id_cliente', 'Cliente', 'required|numeric|min_length[1]',FORM_OPTIONS);
+			$this->form_validation->set_rules('status', 'status', 'required|min_length[2]|alpha', FORM_OPTIONS);
+			$this->form_validation->set_rules('valor', 'valor', 'required|alpha_numeric|min_length[3]', FORM_OPTIONS);
+			$this->form_validation->set_rules('data_pedido', 'data do pedido', 'required|min_length[10]', FORM_OPTIONS);
+			$this->form_validation->set_rules('descricao', 'descricao', 'required|alpha_numeric|min_length[10]', FORM_OPTIONS);
+		if ($this->form_validation->run() == FALSE){
+            $errors = validation_errors();
+            echo json_encode(['error'=>$errors]);
+        }else{
+		echo $this->pedidos_model->updatePedidos($this->input->post());
 		}
+		
+		
 	}
 
 	public function deletePedido(){
