@@ -1,4 +1,7 @@
 <?php
+// By Larissa Moro 
+// https://github.com/LariMoro20
+// PHP CodeIgniter 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Pedidos extends CI_Controller {
