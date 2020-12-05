@@ -20,10 +20,6 @@ class relatorio_model extends CI_Model {
 		return $Clientes;
 	}
 	
-
-
-	
-
 	public function addClientes($POST){
 			$data = array(
 				'nome' => utf8_encode($POST['nome']),
