@@ -15,7 +15,19 @@ class pedidos_model extends CI_Model {
 		if($id){
 			$this->db->where('Id', $id);
 		}
+		$this->db->join('clientes', 'clientes.Id = pedidos.id_cliente');
+		$this->db->select('*');
+		$this->db->select('clientes.Id as cliId');
+		$this->db->select('pedidos.Id as IdPed');
+
 		$Pedidos = $this->db->get('pedidos')->result();
+
+		foreach ($Pedidos as $ped) {
+			$data_pedido = new DateTime($ped->data_pedido);
+			$ped->data_pedido= $data_pedido->format('d/m/Y');
+		}
+
+
 		return $Pedidos;
 	}
 	

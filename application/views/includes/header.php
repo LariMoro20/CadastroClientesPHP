@@ -10,7 +10,7 @@
       <a class="nav-item nav-link active" href="#">Inicial <span class="sr-only">(current)</span></a>
       <a class="nav-item nav-link" href="<?= BASE_URL.'clientes' ?>">Clientes</a>
       <a class="nav-item nav-link" href="<?= BASE_URL.'pedidos' ?>">Pedidos</a>
-      <a class="nav-item nav-link disabled" href="#">Disabled</a>
+      <a class="nav-item nav-link " href="<?= BASE_URL.'Relatorio' ?>">Relatório</a>
     </div>
   </div>
 </nav>

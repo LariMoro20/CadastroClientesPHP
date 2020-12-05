@@ -64,14 +64,16 @@ $('form#addPedido').on( 'submit', function (e) {
                 var element = $(this);
                 let id=element.closest('tr').attr('idPac');
             
-                let id_cliente=       element.closest('tr').find('td.td-id_cliente').text();
+                let id_cliente=       element.closest('tr').find('td.td-id_cliente').attr('cli');
                 let status=        element.closest('tr').find('td.td-status').text();
                 let descricao=        element.closest('tr').find('td.td-descricao').text();
                 let valor=        element.closest('tr').find('td.td-valor').text();
                 let data_pedido=        element.closest('tr').find('td.td-data_pedido').text();
 
                 $('#IdInput').val(id);
-                $('#id_cliente').val(id_cliente);
+                $('#id_cliente option[value='+id_cliente+']').attr('selected','selected');
+
+               
                 $('#status').val(status);
                 $('#descricao').val(descricao);
                 $('#valor').val(valor);
@@ -325,7 +327,7 @@ $('form#addPedido').on( 'submit', function (e) {
                 $('#IdInput').val(id);
                 $('#nomeInput').val(nome);
                 $('#telefoneInput').val(telefone);
-                $('#cepInput').val(estado);
+                //$('#cepInput').val(estado);
                 $('#estadoInput').val(estado);
                 $('#cidadeInput').val(cidade);
                 $('#bairroInput').val(bairro);

@@ -25,17 +25,17 @@
         </thead>
         <tbody>
           <?php foreach ($pedido as $ped) { ?>
-          <tr idPac='<?=$ped->Id ?>'>
-          <td class='td-nome'><?= $ped->Id ?></td>
+          <tr idPac='<?=$ped->IdPed ?>'>
+          <td class='td-nome'><?= $ped->IdPed ?></td>
 
-            <td class='td-id_cliente'><?= $ped->id_cliente ?></td>
+            <td class='td-id_cliente' cli='<?= $ped->id_cliente ?>'>[<?= $ped->id_cliente ?>] <?= $ped->nome ?></td>
             <td class='td-status'><?= $ped->status ?></td>
             <td class='td-valor'><?= $ped->valor ?></td>
             <td class='td-descricao'><?= $ped->descricao_pedido ?></td>
 
             <td class='td-data_pedido'><?= $ped->data_pedido ?></td>
             <td><a class='btneditped' href="#." ><i class="fa fa-pencil-square-o"></i></a></td>
-            <td><a class='btnremoveped' idPac='<?=$ped->Id ?>' href="#."><i class="fa fa-window-close"></i></a></td>
+            <td><a class='btnremoveped' idPac='<?=$ped->IdPed ?>' href="#."><i class="fa fa-window-close"></i></a></td>
 
           </tr>
         <?php } ?>
@@ -57,8 +57,11 @@
                   <div class="row">
                     <div class="form-group col-md-6">
                       <label for="id_cliente">Cliente*</label>
-                      <input type="text" aria-describedby="id_clienteHelp"  autocomplete="off" class="form-control" name='id_cliente' id="" placeholder="" required>
-                      
+                      <select aria-describedby="id_clienteHelp" class="form-control" name='id_cliente' required>
+                        <?php foreach ($clientes as $cli) { ?>
+                          <option value='<?= $cli->Id ?>'><?= $cli->nome ?></option>
+                        <?php } ?>
+                      </select>                      
                       <small id="id_clienteHelp" class="form-text text-muted">Cliente</small>
                     </div>
 
@@ -115,8 +118,11 @@
                    
                   <div class="form-group col-md-6">
                       <label for="id_cliente">Cliente*</label>
-                      <input type="text" aria-describedby="id_clienteHelp"  autocomplete="off" class="form-control" name='id_cliente' id="id_cliente" placeholder="" required>
-                      
+                      <select aria-describedby="id_clienteHelp" class="form-control" name='id_cliente' required>
+                        <?php foreach ($clientes as $cli) { ?>
+                          <option value='<?= $cli->Id ?>'><?= $cli->nome ?></option>
+                        <?php } ?>
+                      </select>                         
                       <small id="id_clienteHelp" class="form-text text-muted">Cliente</small>
                     </div>
 

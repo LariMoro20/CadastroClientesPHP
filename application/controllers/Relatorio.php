@@ -4,7 +4,7 @@
 // PHP CodeIgniter 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Clientes extends CI_Controller {
+class Relatorio extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
@@ -14,7 +14,7 @@ class Clientes extends CI_Controller {
 
 	public function index(){
 		$data = array(
-			'page_title'=> 'Clientes',
+			'page_title'=> 'Relatório',
 			'cliente'=>$this->clientes_model->getClientes(),
 			);
 		$this->load->view('includes/design',$data);

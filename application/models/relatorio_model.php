@@ -5,7 +5,7 @@
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class clientes_model extends CI_Model {
+class relatorio_model extends CI_Model {
 	public function __construct()	{
 		parent::__construct();
 		if(isset($_POST)){ array_walk_recursive($_POST, function(&$v, $k) {$v = (utf8_decode($v));}); }
