@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12 text-center">
-      <h1>Lista de cliente</h1>
+      <h1>Lista de Pedidos</h1>
     </div>
     <div class="col-md-12 text-center margin-bt20">
       <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#addModal">
@@ -13,31 +13,26 @@
       <table class="table" id='clitable'>
         <thead>
           <tr>
-            <th scope="col">Foto</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Telefone</th>
-            <th scope="col">Estado</th>
-            <th scope="col">Cidade</th>
-            <th scope="col">Bairro</th>
-            <th scope="col">Rua</th>
-            <th scope="col">Numero</th>       
-            <th scope="col">Remover</th>
+            <th scope="col">CodPedido</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Status</th>
+            <th scope="col">Valor</th>
+            <th scope="col">Data</th>
             <th scope="col">Editar</th>
+            <th scope="col">Excluir</th>
           </tr>
         </thead>
         <tbody>
-          <?php foreach ($cliente as $cli) { ?>
-          <tr idPac='<?=$cli->Id ?>'>
-            <td class='td-img'><img class='img-pac' src='<?= BASE_URL.$cli->foto ?>' ></td>
-            <td class='td-nome'><?= $cli->nome ?></td>
-            <td class='td-telefone'><?= $cli->telefone ?></td>
-            <td class='td-estado'><?= $cli->estado ?></td>
-            <td class='td-cidade'><?= $cli->cidade ?></td>
-            <td class='td-bairro'><?= $cli->bairro ?></td>
-            <td class='td-rua'><?= $cli->rua ?></td>
-            <td class='td-numero'><?= $cli->numero ?></td>
-            <td><a class='btnremovepac' idPac='<?=$cli->Id ?>' href="#."><i class="fa fa-window-close"></i></a></td>
-            <td><a class='btneditpac' href="#." ><i class="fa fa-pencil-square-o"></i></a></td>
+          <?php foreach ($pedido as $ped) { ?>
+          <tr idPac='<?=$ped->Id ?>'>
+          <td class='td-nome'><?= $ped->Id ?></td>
+
+            <td class='td-id_cliente'><?= $ped->id_cliente ?></td>
+            <td class='td-status'><?= $ped->status ?></td>
+            <td class='td-valor'><?= $ped->valor ?></td>
+            <td class='td-data_pedido'><?= $ped->data_pedido ?></td>
+            <td><a class='btnremoveped' idPac='<?=$ped->Id ?>' href="#."><i class="fa fa-window-close"></i></a></td>
+            <td><a class='btneditped' href="#." ><i class="fa fa-pencil-square-o"></i></a></td>
           </tr>
         <?php } ?>
         </tbody>
@@ -47,7 +42,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="addModalLabel">Adicionar Cliente</h5>
+              <h5 class="modal-title" id="addModalLabel">Adicionar Pedido</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -57,58 +52,33 @@
               <div class="modal-body">
                   <div class="row">
                     <div class="form-group col-md-6">
-                      <label for="Nome">Nome*</label>
-                      <input type="text" aria-describedby="nomeHelp"  autocomplete="off" class="form-control" name='nome' id="Nome" placeholder="" required>
+                      <label for="id_cliente">Cliente*</label>
+                      <input type="text" aria-describedby="id_clienteHelp"  autocomplete="off" class="form-control" name='id_cliente' id="Nome" placeholder="" required>
                       
-                      <small id="nomeHelp" class="form-text text-muted">Nome Completo</small>
+                      <small id="id_clienteHelp" class="form-text text-muted">Cliente</small>
                     </div>
 
                     <div class="form-group col-md-6">
-                      <label for="data_nasc">Telefone*</label>
-                      <input type="text" autocomplete="off" aria-describedby="telefoneHelp" name='telefone' class="form-control telefone" id="telefone" placeholder="" >
-                      <small id="telefoneHelp" class="form-text text-muted">Exemplo: (00) 00000-0000</small>
+                      <label for="data_nasc">Status*</label>
+                      <input type="text" autocomplete="off" aria-describedby="statusHelp" name='status' class="form-control status" id="status" placeholder="" required>
+                      <small id="statusHelp" class="form-text text-muted">Status</small>
                     </div>
-
 
                     <div class="form-group col-md-6">
-                      <label for="data_nasc">Digite o CEP (para completar campos automaticamente)</label>
-                      <input type="text"  name='cep' class="form-control cep" id="cep" placeholder="cep">
-                      <small id="cepHelp" class="form-text text-muted">Somente números!</small>
+                      <label for="data_nasc">Valor</label>
+                      <input type="text"  name='valor' class="form-control valor" id="valor" placeholder="valor">
+                      <small id="valorHelp" class="form-text text-muted">Valor do pedido!</small>
                     </div>
                     <div class="form-group col-md-6">
-                      <label for="estado">Estado*</label>
-                      <input type="text" aria-describedby="estadoHelp" name='estado' class="form-control" id="estado" placeholder="" required>
-                      <small id="estadoHelp" class="form-text text-muted">Informe o estado</small>
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label for="cidade">Cidade*</label>
-                      <input type="text" aria-describedby="cidadeHelp" name='cidade' class="form-control" id="cidade" placeholder="" required>
-                      <small id="cidadeHelp" class="form-text text-muted">Informe a cidade</small>
-                    </div>
-                   
-                    <div class="form-group col-md-6">
-                      <label for="bairro">Bairro*</label>
-                      <input type="text" aria-describedby="bairroHelp" name='bairro' class="form-control" id="bairro" placeholder="" required>
-                      <small id="bairroHelp" class="form-text text-muted">Informe o bairro</small>
-                    </div>
-                    <div class="form-group col-md-8">
-                      <label for="rua">Rua*</label>
-                      <input type="text" aria-describedby="ruaHelp" name='rua' class="form-control" id="rua" placeholder="" required>
-                      <small id="ruaHelp" class="form-text text-muted">Informe a rua</small>
-                    </div>
-                    <div class="form-group col-md-4">
-                      <label for="rua">Numero*</label>
-                      <input type="text" aria-describedby="numeroHelp" name='numero' class="form-control" id="numero" placeholder="" required>
-                      <small id="numeroHelp" class="form-text text-muted">Informe a rua</small>
+                      <label for="data_pedido">Data do pedido*</label>
+                      <input type="text" aria-describedby="data_pedidoHelp" name='data_pedido' class="form-control" id="estado" placeholder="" required>
+                      <small id="data_pedidoHelp" class="form-text text-muted">Data do pedido</small>
                     </div>
 
-
-
-                    <div class="form-group col-md-12 text-center"><hr>
-                      <label for="foto">Foto do cliente</label>
-                      <input type="file" aria-describedby="fotoHelp" autocomplete="off"  name='foto' class="form-control" id="foto" placeholder="Foto do cliente"  onchange="document.getElementById('imgspace').src = window.URL.createObjectURL(this.files[0])">
-                      <small id="fotoHelp" class="form-text text-muted">Favor escolher uma foto de rosto limpo, para fácil identificação</small>
-                      <img id="imgspace"  width="200" height="200" />
+                    <div class="form-group col-md-12">
+                      <label for="descricao">Descrição*</label>
+                      <textarea type="text" aria-describedby="descricaoHelp" name='descricao' class="form-control" id="estado" placeholder="" required> </textarea>
+                      <small id="descricaoHelp" class="form-text text-muted">descricao</small>
                     </div>
                     
                   </div>
@@ -163,37 +133,37 @@
                     <div class="form-group col-md-6">
                       <label for="estado">Estado*</label>
                       <input type="text" aria-describedby="estadoHelp" id="estadoInput" name='estado' class="form-control" required>
-                      <small id="estadoHelp" class="form-text text-muted">Informe o estado</small>
+                      <small id="estadoHelp" class="form-text text-muted">Informe seu estado</small>
                     </div>
                     <div class="form-group col-md-6">
                       <label for="cidade">Cidade*</label>
                       <input type="text" aria-describedby="cidadeHelp" id="cidadeInput" name='cidade' class="form-control"  required>
-                      <small id="cidadeHelp" class="form-text text-muted">Informe a cidade</small>
+                      <small id="cidadeHelp" class="form-text text-muted">Informe sua cidade</small>
                     </div>
                    
                     <div class="form-group col-md-6">
                       <label for="bairro">Bairro*</label>
                       <input type="text" aria-describedby="bairroHelp" id="bairroInput" name='bairro' class="form-control" required>
-                      <small id="bairroHelp" class="form-text text-muted">Informe o bairro</small>
+                      <small id="bairroHelp" class="form-text text-muted">Informe seu bairro</small>
                     </div>
                     <div class="form-group col-md-8">
                       <label for="rua">Rua*</label>
                       <input type="text" aria-describedby="ruaHelp" name='rua' class="form-control" id="ruaInput" placeholder="" required>
-                      <small id="ruaHelp" class="form-text text-muted">Informe a rua</small>
+                      <small id="ruaHelp" class="form-text text-muted">Informe sua rua</small>
                     </div>
                     <div class="form-group col-md-4">
                       <label for="rua">Numero*</label>
                       <input type="text" aria-describedby="ruaHelp"  id="numeroInput" name='numero' class="form-control"  placeholder="" required>
-                      <small id="ruaHelp" class="form-text text-muted">Informe a rua</small>
+                      <small id="ruaHelp" class="form-text text-muted">Informe sua rua</small>
                     </div>
 
                 
 
 
                     <div class="form-group col-md-12 text-center"><hr>
-                      <label for="foto">Foto do cliente</label>
+                      <label for="foto">Foto do pedido</label>
                       <input type="hidden" name="oldFoto" id="fotoInputHiden" >
-                      <input type="file" name='foto' class="form-control" id="fotoInput" placeholder="Foto do cliente"  onchange="document.getElementById('imgspace2').src = window.URL.createObjectURL(this.files[0])">
+                      <input type="file" name='foto' class="form-control" id="fotoInput" placeholder="Foto do pedido"  onchange="document.getElementById('imgspede2').src = window.URL.createObjectURL(this.files[0])">
                       <small id="fotoHelp" class="form-text text-muted">Favor escolher uma foto de rosto limpo, para fácil identificação</small>
                       <img id="imgspace2"  width="200" height="200" />
                     </div>

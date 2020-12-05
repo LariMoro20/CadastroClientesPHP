@@ -6,9 +6,13 @@ class Clientes extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('clientes_model');
+		$this->load->library('form_validation');
 	}
 
 	public function index(){
+
+
+
 		$data = array(
 			'page_title'=> 'Inicial',
 			'cliente'=>$this->clientes_model->getClientes(),
@@ -20,6 +24,22 @@ class Clientes extends CI_Controller {
 	}
 
 	public function addCliente(){
+
+		
+		$this->form_validation->set_rules('nome', 'Nome', 'required|alpha|min_length[3]',FORM_OPTIONS);
+        $this->form_validation->set_rules('telefone', 'Telefone', 'required', FORM_OPTIONS);
+        $this->form_validation->set_rules('cep', 'cep', 'required|alpha_numeric', FORM_OPTIONS);
+        $this->form_validation->set_rules('estado', 'estado', 'required|min_length[2]|max_length[2]', FORM_OPTIONS);
+        $this->form_validation->set_rules('cidade', 'cidade', 'required|alpha|min_length[3]', FORM_OPTIONS);
+        $this->form_validation->set_rules('bairro', 'bairro', 'required|alpha|min_length[3]', FORM_OPTIONS);
+		$this->form_validation->set_rules('numero', 'numero', 'required|numeric|min_length[1]', FORM_OPTIONS);
+		$this->form_validation->set_rules('rua', 'rua', 'required|alpha|min_length[3]', FORM_OPTIONS);
+		if ($this->form_validation->run() == FALSE){
+            $errors = validation_errors();
+            echo json_encode(['error'=>$errors]);
+        }else{
+           
+
 		if(isset($_FILES['foto']) && $_FILES['foto']['name']!=''){
 			$dados= $this->clientes_model->addClientes($this->input->post());
 			$id=json_decode($dados, true);
@@ -50,9 +70,26 @@ class Clientes extends CI_Controller {
 
 		
 		}
+        }
+
+
 	}
 
 	public function editCliente(){
+
+		$this->form_validation->set_rules('nome', 'Nome', 'required|alpha|min_length[3]',FORM_OPTIONS);
+        $this->form_validation->set_rules('telefone', 'Telefone', 'required', FORM_OPTIONS);
+        $this->form_validation->set_rules('cep', 'cep', 'required|alpha_numeric', FORM_OPTIONS);
+        $this->form_validation->set_rules('estado', 'estado', 'required|min_length[2]|max_length[2]|alpha', FORM_OPTIONS);
+        $this->form_validation->set_rules('cidade', 'cidade', 'required|alpha|min_length[3]', FORM_OPTIONS);
+        $this->form_validation->set_rules('bairro', 'bairro', 'required|alpha|min_length[3]', FORM_OPTIONS);
+		$this->form_validation->set_rules('numero', 'numero', 'required|numeric|min_length[1]', FORM_OPTIONS);
+		$this->form_validation->set_rules('rua', 'rua', 'required|alpha|min_length[3]', FORM_OPTIONS);
+
+		if ($this->form_validation->run() == FALSE){
+            $errors = validation_errors();
+            echo json_encode(['error'=>$errors]);
+        }else{
 		
 		$dados= $this->clientes_model->updateClientes($this->input->post());
 		$array=json_decode($dados, true);
@@ -89,6 +126,7 @@ class Clientes extends CI_Controller {
 
 			}
 		}
+	}
 	}
 
 	public function deleteCliente(){

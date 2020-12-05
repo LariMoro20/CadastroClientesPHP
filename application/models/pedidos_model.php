@@ -12,13 +12,7 @@ class pedidos_model extends CI_Model {
 			$this->db->where('Id', $id);
 		}
 		$Pedidos = $this->db->get('pedidos')->result();
-		foreach ($Pedidos as $pac) {
-			$datanasc = new DateTime($pac->data_nasc);
-			$pac->data_nasc= $datanasc->format('d/m/Y');
-		}
 		return $Pedidos;
-		
-		
 	}
 	
 
@@ -27,14 +21,13 @@ class pedidos_model extends CI_Model {
 	public function addPedidos($POST){
 			$valida=$this->db_model->validaDados($POST);
 			if($valida['status']){
-			$dataNasc = DateTime::createFromFormat('d/m/Y', $POST['data_nasc']);
+			$data_pedido = DateTime::createFromFormat('d/m/Y', $POST['data_pedido']);
 			$data = array(
-				'nome' => utf8_encode($POST['nome']),
-				'nome_mae' => utf8_encode($POST['nome_mae']),
-				'data_nasc' => $dataNasc->format('Y-m-d'),
-				'CPF' => $POST['CPF'],
-				'CNS' => $POST['CNS'],
-				'endereco' => utf8_encode($POST['endereco']),
+				'id_cliente' => utf8_encode($POST['nome']),
+				'status' => utf8_encode($POST['status']),
+				'data_pedido' => $data_pedido->format('Y-m-d'),
+				'valor' => $POST['valor'],
+				'descricao' => $POST['descricao']
 				);
 
 			if($this->db->insert('pedidos', $data)){
@@ -58,17 +51,15 @@ class pedidos_model extends CI_Model {
 	}
 	
 	public function updatePedidos($POST){
-		$valida=$this->db_model->validaDados($POST);
-		if($valida['status']){
-			$dataNasc = DateTime::createFromFormat('d/m/Y', $POST['data_nasc']);
+			$data_pedido = DateTime::createFromFormat('d/m/Y', $POST['data_pedido']);
 			$data = array(
-				'nome' => utf8_encode($POST['nome']),
-				'nome_mae' => utf8_encode($POST['nome_mae']),
-				'data_nasc' => $dataNasc->format('Y-m-d'),
-				'CPF' => $POST['CPF'],
-				'CNS' => $POST['CNS'],
-				'endereco' => utf8_encode($POST['endereco']),
+				'id_cliente' => utf8_encode($POST['nome']),
+				'status' => utf8_encode($POST['status']),
+				'data_pedido' => $data_pedido->format('Y-m-d'),
+				'valor' => $POST['valor'],
+				'descricao' => $POST['descricao']
 				);
+
 			$this->db->where('Id', $POST['Id']);
 			if($this->db->update('pedidos', $data)){
 				$retorno['msg']='Sucesso!';
@@ -80,20 +71,16 @@ class pedidos_model extends CI_Model {
 				$retorno['status']=false;
 				$retorno['id']=null;
 			}
-		}else{
-				$retorno['msg']=$valida['msg'];
-				$retorno['status']=false;
-				$retorno['id']=null;
-			}
+		
 			return json_encode($retorno);
 
 	}
-	public function deletePaciente($id){
+	public function deletePedido($id){
 		if($id){
 			$id=$id['id'];
 			
-			$paciente=$this->db_model->getPedidos($id);
-			$foto=$paciente[0]->foto;
+			$pedido=$this->db_model->getPedidos($id);
+			$foto=$pedido[0]->foto;
 			
 			$path = dirname(dirname(dirname(__FILE__)));
 			$path=$path.'/'.$foto;
@@ -109,7 +96,7 @@ class pedidos_model extends CI_Model {
 			}
 			
 		}else{
-			$retorno['msg']='Paciente não informado!';
+			$retorno['msg']='Pedido não informado!';
 			$retorno['status']=false;
 		}
 		return json_encode($retorno);
@@ -122,58 +109,17 @@ class pedidos_model extends CI_Model {
 		$this->db->where('Id', $id);
 		if($this->db->update('pedidos', $data)){
 			$retorno['status'] 	= true;
-			$retorno['msg']		= 'Paciente salvo com sucesso!';
+			$retorno['msg']		= 'Pedido salvo com sucesso!';
 		}
 		else{
 			$retorno['status'] 	= false;
-			$retorno['msg']		= 'Erro ao adicionar arquivo ao paciente, mas paciente salvo!';
+			$retorno['msg']		= 'Erro ao adicionar arquivo ao pedido, mas pedido salvo!';
 		}
 		return json_encode($retorno);
 
 	}
 
 
-	public function validaDados($dados){
-		$retorno['status'] 	= true;
-		$retorno['msg']		= 'Dados corretos!';
-
-		if($this->db_model->validaData($dados['data_nasc'], 'd/m/Y')){
-			if($this->db_model->validaCPF($dados['CPF'])){
-			}else{
-				$retorno['status'] 	= false;
-				$retorno['msg']		= 'CPF incorreto!';
-			}
-		}else{
-			$retorno['status'] 	= false;
-			$retorno['msg']		= 'Data incorreta!';
-		}
-		return $retorno;
-	}
-
-	public function validaData($date, $format = 'Y-m-d H:i:s'){
-		$d = DateTime::createFromFormat($format, $date);
-		return $d && $d->format($format) == $date;
-	}
-
-	public function validaCPF($cpf) {
-		$cpf = preg_replace( '/[^0-9]/is', '', $cpf );
-		if (strlen($cpf) != 11) {
-			return false;
-		}
-		if (preg_match('/(\d)\1{10}/', $cpf)) {
-			return false;
-		}
-		for ($t = 9; $t < 11; $t++) {
-			for ($d = 0, $c = 0; $c < $t; $c++) {
-				$d += $cpf[$c] * (($t + 1) - $c);
-			}
-			$d = ((10 * $d) % 11) % 10;
-			if ($cpf[$c] != $d) {
-				return false;
-			}
-		}
-		return true;
-	}
 	
 	public function isDataEmpty($arrayOfData, $safeValues = false){
 		foreach ($arrayOfData as $key => $value) {

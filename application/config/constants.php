@@ -89,5 +89,17 @@ defined('SITE_NAME') or define('SITE_NAME','Cadastro Clientes');
 defined('SITE_DESC') or define('SITE_DESC','Cadastro de clientes');
 
 // Custom constants 
+
+
+$dados=array(
+    'required'      => 'Informe um %s.',
+    'max_length'     => 'O campo %s somente aceita  UF.',
+    'alpha'     => 'O campo %s somente aceita  letras.',
+    'min_length'     => 'O campo %s precisa ser válido.',
+    'alpha_numeric' => 'O campo %s aceita apenas letras e números.',
+    'numeric'=> 'O campo %s aceita apenas números.',
+);
+defined('FORM_OPTIONS') or define('FORM_OPTIONS',$dados);
+
 defined('BASE_URL') or define('BASE_URL','http://localhost/CadastroClientesPHP/');
 defined('DESIGN_PATH') or define('DESIGN_PATH',BASE_URL.'design/');

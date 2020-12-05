@@ -10,11 +10,12 @@
         <script>
 
 
-            $('form#addCliente').on( 'submit', function (e) { 
+
+$('form#addPedido').on( 'submit', function (e) { 
                 e.preventDefault();
                 var formData = new FormData(this);
                 $.ajax({
-                    url: '<?= BASE_URL ?>clientes/addCliente',
+                    url: '<?= BASE_URL ?>pedidos/addPedido',
                     type: "POST",
                     processData: false,
                     contentType: false,
@@ -26,10 +27,69 @@
                             titulo='Adicionado!';
                         }else{
                             titulo='Revise os dados!'
+
+                        }
+                        if(data.msg){
+                            msg=data.msg;
+                        }else{
+                            msg=data.error;
                         }
                         $.confirm({
                         title: titulo,
-                        content: data.msg,
+                        content: msg,
+                        buttons: {
+                            OK: function () {
+                                if(data.status){
+                                    location.reload();
+                                }
+                            
+                            }
+                        }  
+                        });
+                    },
+                    error:function(data) {
+                        $.confirm({
+                        title: 'Houve um erro!',
+                        content: 'Confira os dados e tente novamente',
+                        buttons: {
+                            OK: function () {
+                            }
+                        }  
+                        });
+                    }
+                });
+            });
+
+
+
+
+
+            $('form#addPedido').on( 'submit', function (e) { 
+                e.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    url: '<?= BASE_URL ?>pedidos/addPedido',
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    data: formData,
+                    success: function(data) {
+                        console.log(data);
+                        data=JSON.parse(data);
+                        if(data.status){
+                            titulo='Adicionado!';
+                        }else{
+                            titulo='Revise os dados!'
+
+                        }
+                        if(data.msg){
+                            msg=data.msg;
+                        }else{
+                            msg=data.error;
+                        }
+                        $.confirm({
+                        title: titulo,
+                        content: msg,
                         buttons: {
                             OK: function () {
                                 if(data.status){
@@ -53,11 +113,11 @@
                 });
             });
     
-            $('form#editCliente').on( 'submit', function (e) { 
+            $('form#editPedido').on( 'submit', function (e) { 
                     e.preventDefault();
                     var formData = new FormData(this);
                     $.ajax({
-                    url: '<?= BASE_URL ?>clientes/editCliente',
+                    url: '<?= BASE_URL ?>pedido/editPedido',
                     type: "POST",
                     processData: false,
                     contentType: false,
@@ -69,9 +129,16 @@
                         }else{
                             titulo='Revise os dados!'
                         }
+
+                        
+                        if(data.msg){
+                            msg=data.msg;
+                        }else{
+                            msg=data.error;
+                        }
                         $.confirm({
                         title: titulo,
-                        content: data.msg,
+                        content: msg,
                         buttons: {
                             OK: function () {
                                 if(data.status){
@@ -101,12 +168,12 @@
                 let id=element.attr('idPac');
                 $.confirm({
                     title: 'Remover item!',
-                    content: 'Deseja realmente deletar este paciente?',
+                    content: 'Deseja realmente deletar este cliente?',
                     buttons: {
                         Sim: function () {
                         $.ajax({
                                 type: "POST",
-                                url: "<?= BASE_URL ?>clientes/deleteCliente",
+                                url: "<?= BASE_URL ?>pedidos/deletePedido",
                                 data: {id:id},
                                 success: function(msg){
                                 element.closest('tr').remove();
