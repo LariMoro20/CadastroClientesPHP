@@ -14,7 +14,7 @@ class Clientes extends CI_Controller {
 
 	public function index(){
 		$data = array(
-			'page_title'=> 'Inicial',
+			'page_title'=> 'Clientes',
 			'cliente'=>$this->clientes_model->getClientes(),
 			);
 		$this->load->view('includes/design',$data);

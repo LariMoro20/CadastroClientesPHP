@@ -2,6 +2,7 @@
 // By Larissa Moro 
 // https://github.com/LariMoro20
 // PHP CodeIgniter 
+
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class clientes_model extends CI_Model {

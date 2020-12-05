@@ -10,12 +10,11 @@ class Pedidos extends CI_Controller {
 		parent::__construct();
 		$this->load->model('pedidos_model');
 		$this->load->library('form_validation');
-
 	}
 
 	public function index(){
 		$data = array(
-			'page_title'=> 'Inicial',
+			'page_title'=> 'Pedidos',
 			'pedido'=>$this->pedidos_model->getPedidos(),
 			);
 		$this->load->view('includes/design',$data);
@@ -34,7 +33,6 @@ class Pedidos extends CI_Controller {
             $errors = validation_errors();
             echo json_encode(['error'=>$errors]);
         }else{
-			
 			echo $this->pedidos_model->addPedidos($this->input->post());
 		}
 	}
@@ -51,13 +49,9 @@ class Pedidos extends CI_Controller {
         }else{
 		echo $this->pedidos_model->updatePedidos($this->input->post());
 		}
-		
-		
 	}
 
 	public function deletePedido(){
 		echo $this->pedidos_model->deletePedido($this->input->post());
 	}
-
-
 }

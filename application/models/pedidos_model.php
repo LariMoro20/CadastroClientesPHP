@@ -19,12 +19,9 @@ class pedidos_model extends CI_Model {
 		return $Pedidos;
 	}
 	
-
-	
-
 	public function addPedidos($POST){
-		//	$valida=$this->pedidos_model->validaDados($POST);
-			//if($valida['status']){
+		$valida=$this->pedidos_model->validaData( $POST['data_pedido'],'d/m/Y',);
+		if($valida['status']){
 			$data_pedido = DateTime::createFromFormat('d/m/Y', $POST['data_pedido']);
 			$data = array(
 				'id_cliente' => utf8_encode($POST['id_cliente']),
@@ -45,16 +42,18 @@ class pedidos_model extends CI_Model {
 				$retorno['status']=false;
 				$retorno['id']=null;
 			}
-	//}else{
-		//	$retorno['msg']=$valida['msg'];
-		//	$retorno['status']=false;
-		//	$retorno['id']=null;
-		//}
+		}else{
+				$retorno['msg']=$valida['msg'];
+				$retorno['status']=false;
+				$retorno['id']=null;
+			}
 		
 		return json_encode($retorno);
 	}
 	
 	public function updatePedidos($POST){
+		$valida=$this->pedidos_model->validaData( $POST['data_pedido'],'d/m/Y',);
+		if($valida['status']){
 			$data_pedido = DateTime::createFromFormat('d/m/Y', $POST['data_pedido']);
 			$data = array(
 				'id_cliente' => utf8_encode($POST['id_cliente']),
@@ -75,21 +74,16 @@ class pedidos_model extends CI_Model {
 				$retorno['status']=false;
 				$retorno['id']=null;
 			}
-		
+		}else{
+			$retorno['msg']=$valida['msg'];
+			$retorno['status']=false;
+			$retorno['id']=null;
+		}
 			return json_encode($retorno);
-
 	}
 	public function deletePedido($id){
 		if($id){
-			$id=$id['id'];
-			
 			$pedido=$this->pedidos_model->getPedidos($id);
-			$foto=$pedido[0]->foto;
-			
-			$path = dirname(dirname(dirname(__FILE__)));
-			$path=$path.'/'.$foto;
-		
-			unlink($path);
 			$this->db->where('Id', $id);
         	if($this->db->delete('pedidos')){
 				$retorno['msg']='Deletado com sucesso!';
@@ -98,7 +92,6 @@ class pedidos_model extends CI_Model {
 				$retorno['msg']='Erro ao deletar!';
 				$retorno['status']=false;
 			}
-			
 		}else{
 			$retorno['msg']='Pedido não informado!';
 			$retorno['status']=false;
@@ -123,20 +116,17 @@ class pedidos_model extends CI_Model {
 
 	}
 
-
-	
-	public function isDataEmpty($arrayOfData, $safeValues = false){
-		foreach ($arrayOfData as $key => $value) {
-			if($safeValues){
-				if(strlen($value) < 1 && !in_array($key, $safeValues))
-					return true;
-			}
-			else if(strlen($value) < 1)
-				return true;
+	public function validaData($date, $format = 'Y-m-d H:i:s'){
+		$d = DateTime::createFromFormat($format, $date);
+		if($d && $d->format($format) == $date){
+			$retorno['status'] 	= true;
+			$retorno['msg']		= 'Data incorreta!';
+		}else{
+			$retorno['status'] 	= false;
+			$retorno['msg']		= 'Data incorreta!';
 		}
-		return false;
+		return $retorno;
 	}
-
 }
 	
 ?>
