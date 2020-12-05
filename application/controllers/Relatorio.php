@@ -9,6 +9,9 @@ class Relatorio extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('clientes_model');
+		$this->load->model('pedidos_model');
+		$this->load->model('relatorio_model');
+
 		$this->load->library('form_validation');
 	}
 
