@@ -10,7 +10,6 @@
         <script>
 
 
-window.onload = function() { document.forms['MarkerForm'].reset(); };
 $('form#addPedido').on( 'submit', function (e) { 
                 e.preventDefault();
                 var formData = new FormData(this);
@@ -274,49 +273,47 @@ $('form#addPedido').on( 'submit', function (e) {
                     e.preventDefault();
                     var formData = new FormData(this);
                     $.ajax({
-                    url: '<?= BASE_URL ?>clientes/editCliente',
-                    type: "POST",
-                    processData: false,
-                    contentType: false,
-                    data: formData,
-                    success: function(data) {
-                        data=JSON.parse(data);
-                        if(data.status){
-                            titulo='Adicionado!';
-                        }else{
-                            titulo='Revise os dados!'
-                        }
-
-                        
-                        if(data.msg){
-                            msg=data.msg;
-                        }else{
-                            msg=data.error;
-                        }
-                        $.confirm({
-                        title: titulo,
-                        content: msg,
-                        buttons: {
-                            OK: function () {
-                                if(data.status){
-                                    location.reload();
-                                }
+                        url: '<?= BASE_URL ?>clientes/editCliente',
+                        type: "POST",
+                        processData: false,
+                        contentType: false,
+                        data: formData,
+                        success: function(data) {
+                            data=JSON.parse(data);
+                            if(data.status){
+                                titulo='Adicionado!';
+                            }else{
+                                titulo='Revise os dados!'
                             }
-                        }  
-                        });
-                    },
-                    error:function(data) {
-                        $.confirm({
-                        title: 'Houve um erro!',
-                        content: data.msg,
-                        buttons: {
-                            OK: function () {
-                            location.reload(); 
+                            if(data.msg){
+                                msg=data.msg;
+                            }else{
+                                msg=data.error;
                             }
-                        }  
-                        });
-                    }
-                });
+                            $.confirm({
+                                title: titulo,
+                                content: msg,
+                                buttons: {
+                                    OK: function () {
+                                        if(data.status){
+                                            location.reload();
+                                        }
+                                    }
+                                }  
+                            });
+                        },
+                        error:function(data) {
+                            $.confirm({
+                                title: 'Houve um erro!',
+                                content: data.msg,
+                                buttons: {
+                                    OK: function () {
+                                    location.reload(); 
+                                    }
+                                }  
+                            });
+                        }
+                    });
             });
     
             
@@ -338,7 +335,6 @@ $('form#addPedido').on( 'submit', function (e) {
                 $('#IdInput').val(id);
                 $('#nomeInput').val(nome);
                 $('#telefoneInput').val(telefone);
-                //$('#cepInput').val(estado);
                 $('#estadoInput').val(estado);
                 $('#cidadeInput').val(cidade);
                 $('#bairroInput').val(bairro);
@@ -348,7 +344,47 @@ $('form#addPedido').on( 'submit', function (e) {
                 $('#imgspace2').attr("src",image);
                 $('#editModal').modal('show');
             
+            });
+            //============================================
+
+            $('#periodo').change(function (e) { 
+
+                let periodo=$("#periodo option:selected").val();
+                alert(periodo);
             })
+            /*
+            $('.geracsv').on( 'click', function (e) { 
+                var element = $(this);
+                let periodo=$("#periodo option:selected").val();;
+                alert(periodo);
+                $.ajax({
+                    url: '<?= BASE_URL ?>relatorio/relatorio_pedidos',
+                    type: "GET",
+                    processData: false,
+                    contentType: false,
+                    data: periodo,
+                    success: function(data) {
+                        $.confirm({
+                            title: 'Sucesso',
+                            content: 'Seu arquivo foi gerado!',
+                            buttons: {
+                                OK: function () {
+                                }
+                            }  
+                        });
+                    },
+                    error:function(data) {
+                        $.confirm({
+                            title: 'Houve um erro!',
+                            content: 'Tente novamente ou contate o suporte!',
+                            buttons: {
+                                OK: function () {
+                                }
+                            }  
+                        });
+                    }
+                });
+            });*/
         </script>
         
         <script src="<?= DESIGN_PATH ?>mask/dist/jquery.mask.min.js"></script>
