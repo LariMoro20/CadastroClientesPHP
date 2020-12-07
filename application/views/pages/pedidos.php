@@ -20,7 +20,9 @@
             <th scope="col">Descrição</th>
             <th scope="col">Data</th>
             <th scope="col">Editar</th>
+            <th scope="col">CSV</th>
             <th scope="col">Excluir</th>
+
           </tr>
         </thead>
         <tbody>
@@ -28,13 +30,14 @@
           <tr idPac='<?=$ped->IdPed ?>'>
           <td class='td-nome'><?= $ped->IdPed ?></td>
 
-            <td class='td-id_cliente' cli='<?= $ped->id_cliente ?>'>[<?= $ped->id_cliente ?>] <?= $ped->nome ?></td>
-            <td class='td-status'><?= $ped->status ?></td>
+            <td class='td-id_cliente' cli='<?= $ped->id_cliente ?>'><?= $ped->nome ?></td>
+            <td class='td-status' sta='<?= $ped->id_status ?>'><?= $ped->status ?></td>
             <td class='td-valor'><?= $ped->valor ?></td>
             <td class='td-descricao'><?= $ped->descricao_pedido ?></td>
 
             <td class='td-data_pedido'><?= $ped->data_pedido ?></td>
             <td><a class='btneditped' href="#." ><i class="fa fa-pencil-square-o"></i></a></td>
+            <td><a class='csv' href="<?= BASE_URL ?>Relatorio/relatorio_pedido/<?=$ped->IdPed ?>" ><i class="fa fa-table"></i></a></td>
             <td><a class='btnremoveped' idPac='<?=$ped->IdPed ?>' href="#."><i class="fa fa-window-close"></i></a></td>
 
           </tr>
@@ -51,13 +54,14 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form  id="addPedido" class='addPedido' action='#' method='post'  enctype='multipart/form-data' >
+            <form  id="addPedido" class='addPedido' action='#' method='post' name='addPedido' enctype='multipart/form-data' >
 
               <div class="modal-body">
                   <div class="row">
                     <div class="form-group col-md-6">
-                      <label for="id_cliente">Cliente*</label>
-                      <select aria-describedby="id_clienteHelp" class="form-control" name='id_cliente' required>
+                      <label for="id_clientfe">Cliente*</label>
+                      <select autocomplete="off" aria-describedby="id_clienteHelp" class="form-control" name='id_cliente' required>
+                        
                         <?php foreach ($clientes as $cli) { ?>
                           <option value='<?= $cli->Id ?>'><?= $cli->nome ?></option>
                         <?php } ?>
@@ -118,9 +122,10 @@
                    
                   <div class="form-group col-md-6">
                       <label for="id_cliente">Cliente*</label>
-                      <select aria-describedby="id_clienteHelp" class="form-control" name='id_cliente' required>
+                      <select aria-describedby="id_clienteHelp" id='id_cliente' class="form-control" name='id_cliente' required>
+                      <option class='atcli' value='---'>---</option>
                         <?php foreach ($clientes as $cli) { ?>
-                          <option value='<?= $cli->Id ?>'><?= $cli->nome ?></option>
+                          <option value='<?= $cli->Id ?>' ><?= $cli->nome ?></option>
                         <?php } ?>
                       </select>                         
                       <small id="id_clienteHelp" class="form-text text-muted">Cliente</small>
@@ -128,7 +133,17 @@
 
                     <div class="form-group col-md-6">
                       <label for="data_nasc">Status*</label>
-                      <input type="text" autocomplete="off" aria-describedby="statusHelp" name='status' class="form-control status" id="status" placeholder="" required>
+                      
+
+ 
+                      <select aria-describedby="statusHelp" class="form-control status" name='status'  id="status" required>
+                      <option class='atsts' value='---'>---</option>
+
+                        <?php foreach ($status as $st) { ?>
+                          <option value='<?= $st->Id ?>'><?= $st->status ?></option>
+                        <?php } ?>
+                      </select>   
+                      
                       <small id="statusHelp" class="form-text text-muted">Status</small>
                     </div>
 

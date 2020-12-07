@@ -16,8 +16,11 @@ class pedidos_model extends CI_Model {
 			$this->db->where('Id', $id);
 		}
 		$this->db->join('clientes', 'clientes.Id = pedidos.id_cliente');
+		$this->db->join('status', 'status.Id = pedidos.status');
+
 		$this->db->select('*');
 		$this->db->select('clientes.Id as cliId');
+		$this->db->select('status.Id as id_status');
 		$this->db->select('pedidos.Id as IdPed');
 
 		$Pedidos = $this->db->get('pedidos')->result();

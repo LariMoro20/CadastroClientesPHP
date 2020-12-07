@@ -10,7 +10,7 @@
         <script>
 
 
-
+window.onload = function() { document.forms['MarkerForm'].reset(); };
 $('form#addPedido').on( 'submit', function (e) { 
                 e.preventDefault();
                 var formData = new FormData(this);
@@ -65,16 +65,27 @@ $('form#addPedido').on( 'submit', function (e) {
                 let id=element.closest('tr').attr('idPac');
             
                 let id_cliente=       element.closest('tr').find('td.td-id_cliente').attr('cli');
+                let nomecli=        element.closest('tr').find('td.td-id_cliente').text();
+      
+
+                let statusid=       element.closest('tr').find('td.td-status').attr('sta');
                 let status=        element.closest('tr').find('td.td-status').text();
+
                 let descricao=        element.closest('tr').find('td.td-descricao').text();
                 let valor=        element.closest('tr').find('td.td-valor').text();
                 let data_pedido=        element.closest('tr').find('td.td-data_pedido').text();
 
                 $('#IdInput').val(id);
-                $('#id_cliente option[value='+id_cliente+']').attr('selected','selected');
-
-               
-                $('#status').val(status);
+                //Selecionando cliente
+                $('.atcli').val(id_cliente);
+                $('.atcli').text(nomecli);
+                $("#id_cliente option:first").attr('selected','selected');
+                //========================
+                 //Selecionando status
+                $('.atsts').val(statusid);
+                $('.atsts').text(status);
+                $("#status option:first").attr('selected','selected');
+                //========================
                 $('#descricao').val(descricao);
                 $('#valor').val(valor);
                 $('#data_pedido').val(data_pedido);

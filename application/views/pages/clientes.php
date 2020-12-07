@@ -21,8 +21,10 @@
             <th scope="col">Bairro</th>
             <th scope="col">Rua</th>
             <th scope="col">Numero</th>       
-            <th scope="col">Remover</th>
+            
             <th scope="col">Editar</th>
+            <th scope="col">CSV</th>
+            <th scope="col">Remover</th>
           </tr>
         </thead>
         <tbody>
@@ -36,9 +38,12 @@
             <td class='td-bairro'><?= $cli->bairro ?></td>
             <td class='td-rua'><?= $cli->rua ?></td>
             <td class='td-numero'><?= $cli->numero ?></td>
-            <td><a class='btnremovecli' idPac='<?=$cli->Id ?>' href="#."><i class="fa fa-window-close"></i></a></td>
             <td><a class='btneditpac' href="#." ><i class="fa fa-pencil-square-o"></i></a></td>
+            <td><a class='csv' href="<?= BASE_URL ?>Relatorio/relatorio_cliente/<?=$cli->Id ?>" ><i class="fa fa-table"></i></a></td>
+            <td><a class='btnremovecli' idPac='<?=$cli->Id ?>' href="#."><i class="fa fa-window-close"></i></a></td>
+
           </tr>
+
         <?php } ?>
         </tbody>
       </table>

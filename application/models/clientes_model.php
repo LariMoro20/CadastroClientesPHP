@@ -33,7 +33,7 @@ class clientes_model extends CI_Model {
 				'numero' => utf8_encode($POST['numero']),
 				'cidade' => utf8_encode($POST['cidade']),
 				'estado' => utf8_encode($POST['estado']),
-				'endereco' => utf8_encode(@$POST['endereco']),
+				'endereco' => 'Rua '.utf8_encode($POST['rua']).' nº '.utf8_encode($POST['numero']).', '.utf8_encode($POST['bairro']).' - '.utf8_encode($POST['cidade']).', '.utf8_encode($POST['estado']) ,
 				);
 
 			if($this->db->insert('clientes', $data)){
@@ -60,7 +60,7 @@ class clientes_model extends CI_Model {
 				'numero' => utf8_encode($POST['numero']),
 				'cidade' => utf8_encode($POST['cidade']),
 				'estado' => utf8_encode($POST['estado']),
-				'endereco' => utf8_encode(@$POST['endereco']),
+				'endereco' => 'Rua '.utf8_encode($POST['rua']).' nº '.utf8_encode($POST['numero']).', '.utf8_encode($POST['bairro']).' - '.utf8_encode($POST['cidade']).', '.utf8_encode($POST['estado']) ,
 				);
 			$this->db->where('Id', $POST['Id']);
 			if($this->db->update('clientes', $data)){

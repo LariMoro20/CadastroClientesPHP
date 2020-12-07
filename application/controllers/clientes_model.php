@@ -20,10 +20,6 @@ class clientes_model extends CI_Model {
 		return $Clientes;
 	}
 	
-
-
-	
-
 	public function addClientes($POST){
 			$data = array(
 				'nome' => utf8_encode($POST['nome']),
@@ -73,10 +69,9 @@ class clientes_model extends CI_Model {
 				$retorno['status']=false;
 				$retorno['id']=null;
 			}
-	
 			return json_encode($retorno);
-
 	}
+	
 	public function deleteCliente($id){
 		if($id){
 			$id=$id['id'];
