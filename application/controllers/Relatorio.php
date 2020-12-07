@@ -14,6 +14,7 @@ class Relatorio extends CI_Controller {
 	public function index(){
 		$data = array(
 			'page_title'=> 'Relatório',
+			'bairros'=> $this->relatorio_model->getBairros(),
 			);
 		$this->load->view('includes/design',$data);
 		$this->load->view('includes/header');
@@ -54,8 +55,54 @@ class Relatorio extends CI_Controller {
 		}
 	}
 	public function relatorio_pedidos(){
+		$id=false; 
+		$mes=false; 
+		$semana=false;
+		$ano=false;
+		$bairro=false;
+		$periodo=$_GET['periodo'];
+		$tipo = substr($_GET['periodo'], 0, 1);
+		$tempo=substr($_GET['periodo'], 1, 1);
+		switch ($tipo) {
+			case 's':
+				$semana=$tempo;
+			break;
+			case 'm':
+				$mes=$tempo;
+			break;
+			case 'y':
+				$ano=$tempo;
+			break;
+		}
 		$data = array(
-			'pedidos'=>$this->relatorio_model->getPedidosForCSV(),
+			'pedidos'=>$this->relatorio_model->getPedidosForCSVPeriodo($id, $mes, $semana, $ano, $bairro),
+			);
+		$this->load->view('pages/relatorio_pedidos',$data);
+	}
+
+
+	
+
+	public function relatorio_pedidosof(){
+		$id=false; 
+		$mes=false; 
+		$ano=false;
+		$bairro=false;
+		$periodo=$_GET['periodo'];
+		$tipo = substr($_GET['periodo'], 1, 1);
+		$tempo=substr($_GET['periodo'], 2, 1);
+		switch ($tipo) {
+			case 's':
+			break;
+			case 'm':
+				$mes=$tempo;
+			break;
+			case 'y':
+				$ano=$tempo;
+			break;
+		}
+		$data = array(
+			'pedidos'=>$this->relatorio_model->getPedidosForCSV($id, $mes, $ano, $bairro),
 			);
 		$this->load->view('pages/relatorio_pedidos',$data);
 	}

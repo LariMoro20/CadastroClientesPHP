@@ -346,48 +346,10 @@ $('form#addPedido').on( 'submit', function (e) {
             
             });
             //============================================
-
-            $('#periodo').change(function (e) { 
-
-                let periodo=$("#periodo option:selected").val();
-                alert(periodo);
-            })
-            /*
-            $('.geracsv').on( 'click', function (e) { 
-                var element = $(this);
-                let periodo=$("#periodo option:selected").val();;
-                alert(periodo);
-                $.ajax({
-                    url: '<?= BASE_URL ?>relatorio/relatorio_pedidos',
-                    type: "GET",
-                    processData: false,
-                    contentType: false,
-                    data: periodo,
-                    success: function(data) {
-                        $.confirm({
-                            title: 'Sucesso',
-                            content: 'Seu arquivo foi gerado!',
-                            buttons: {
-                                OK: function () {
-                                }
-                            }  
-                        });
-                    },
-                    error:function(data) {
-                        $.confirm({
-                            title: 'Houve um erro!',
-                            content: 'Tente novamente ou contate o suporte!',
-                            buttons: {
-                                OK: function () {
-                                }
-                            }  
-                        });
-                    }
-                });
-            });*/
+         
         </script>
         
         <script src="<?= DESIGN_PATH ?>mask/dist/jquery.mask.min.js"></script>
-
+    
     </body>
 </html>
