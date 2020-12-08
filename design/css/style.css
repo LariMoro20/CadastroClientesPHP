@@ -12,7 +12,7 @@ html, body {
 }
 .cancelbtn{
   width: 100%;
- }
+}
 .modal-dialog {
     max-width: 860px;
     margin: 1.75rem auto;
@@ -20,9 +20,14 @@ html, body {
 .margin-bt20{
     margin-bottom: 20px;
 }
-
+.cookie-background {
+    background-color:#74301f;
+}
+.margin-bt50{
+    margin-bottom: 50px;
+}
 .header-top{
-    background-color: #77021f;
+    background-color:#74301f;
 }
 .logo{
     max-width: 100px;

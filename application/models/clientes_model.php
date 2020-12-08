@@ -16,7 +16,12 @@ class clientes_model extends CI_Model {
 		if($id){
 			$this->db->where('Id', $id);
 		}
+		$this->db->select('clientes.*, bairros.bairro, bairros.Id as BaiID');
+		$this->db->join('bairros', 'bairros.Id = clientes.bairro');
 		$Clientes = $this->db->get('clientes')->result();
+
+
+
 		return $Clientes;
 	}
 	
@@ -25,6 +30,8 @@ class clientes_model extends CI_Model {
 	
 
 	public function addClientes($POST){
+
+
 			$data = array(
 				'nome' => utf8_encode($POST['nome']),
 				'telefone' => utf8_encode($POST['telefone']),
@@ -139,6 +146,13 @@ class clientes_model extends CI_Model {
 		return $retorno;
 	}
 
+	public function getBairros($id=false){
+		if($id){
+			$this->db->where('Id', $id);
+		}
+		$Clientes = $this->db->get('bairros')->result();
+		return $Clientes;
+	}
 	
 	public function isDataEmpty($arrayOfData, $safeValues = false){
 		foreach ($arrayOfData as $key => $value) {

@@ -5,7 +5,7 @@
       <h1>Lista de Pedidos</h1>
     </div>
     <div class="col-md-12 text-center margin-bt20">
-      <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#addModal">
+      <button type="button" class="btn cookie-background btn-primary " data-toggle="modal" data-target="#addModal">
         + Cadastrar Novo
       </button>
       </div>
@@ -71,7 +71,11 @@
 
                     <div class="form-group col-md-6">
                       <label for="data_nasc">Status*</label>
-                      <input type="text" autocomplete="off" aria-describedby="statusHelp" name='status' class="form-control status" id="" placeholder="" required>
+                      <select aria-describedby="statusHelp" class="form-control status" name='status' required>
+                        <?php foreach ($status as $st) { ?>
+                          <option value='<?= $st->Id ?>'><?= $st->status ?></option>
+                        <?php } ?>
+                      </select>                       
                       <small id="statusHelp" class="form-text text-muted">Status</small>
                     </div>
 

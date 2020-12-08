@@ -327,17 +327,23 @@ $('form#addPedido').on( 'submit', function (e) {
                 let telefone=        element.closest('tr').find('td.td-telefone').text();
                 let estado=        element.closest('tr').find('td.td-estado').text();
                 let cidade=        element.closest('tr').find('td.td-cidade').text();
-                let bairro=   element.closest('tr').find('td.td-bairro').text();
+                
                 let numero=   element.closest('tr').find('td.td-numero').text();
                 let rua=   element.closest('tr').find('td.td-rua').text();
                 let image=      element.closest('tr').find('td.td-img img').attr("src");
             
+
+                let bairroId=       element.closest('tr').find('td.td-bairro').attr('bai');
+                let bairro=        element.closest('tr').find('td.td-bairro').text();
+                $('.atbai').val(bairroId);
+                $('.atbai').text(bairro);
+                $("#bairroInput option:first").attr('selected','selected');
+
                 $('#IdInput').val(id);
                 $('#nomeInput').val(nome);
                 $('#telefoneInput').val(telefone);
                 $('#estadoInput').val(estado);
                 $('#cidadeInput').val(cidade);
-                $('#bairroInput').val(bairro);
                 $('#ruaInput').val(rua);
                 $('#numeroInput').val(numero);
                 $('#fotoInputHiden').val(image.replace('<?= BASE_URL ?>',''));

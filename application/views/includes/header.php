@@ -1,5 +1,5 @@
 <header class='header-top text-center margin-bt20'>
-    <img class='logo' src='<?= DESIGN_PATH ?>img/logo.png'/>Meus clientes
+    <img class='logo' src='<?= DESIGN_PATH ?>img/logo.png'/><h1 class='text-light'>Rita's Cookies</h1>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Painel</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">

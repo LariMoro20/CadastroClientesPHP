@@ -15,6 +15,7 @@ class Relatorio extends CI_Controller {
 		$data = array(
 			'page_title'=> 'Relatório',
 			'bairros'=> $this->relatorio_model->getBairros(),
+			'bairrosCli'=> $this->relatorio_model->getBairrosClientes(),
 			);
 		$this->load->view('includes/design',$data);
 		$this->load->view('includes/header');
@@ -60,20 +61,23 @@ class Relatorio extends CI_Controller {
 		$semana=false;
 		$ano=false;
 		$bairro=false;
-		$periodo=$_GET['periodo'];
-		$tipo = substr($_GET['periodo'], 0, 1);
-		$tempo=substr($_GET['periodo'], 1, 1);
-		switch ($tipo) {
-			case 's':
-				$semana=$tempo;
-			break;
-			case 'm':
-				$mes=$tempo;
-			break;
-			case 'y':
-				$ano=$tempo;
-			break;
+		if(isset($_GET['periodo'])){
+			$periodo=$_GET['periodo'];
+			$tipo = substr($_GET['periodo'], 0, 1);
+			$tempo=substr($_GET['periodo'], 1, 1);
+			switch ($tipo) {
+				case 's':
+					$semana=$tempo;
+				break;
+				case 'm':
+					$mes=$tempo;
+				break;
+				case 'y':
+					$ano=$tempo;
+				break;
+			}
 		}
+		
 		$data = array(
 			'pedidos'=>$this->relatorio_model->getPedidosForCSVPeriodo($id, $mes, $semana, $ano, $bairro),
 			);

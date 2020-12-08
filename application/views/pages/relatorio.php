@@ -1,16 +1,16 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12 text-center">
+    <div class="col-md-12 text-center mb-4">
       <h1>Gerar relatórios</h1>
     </div>
     <div class="col-md-4 text-center">
     <h4>Imprimir toda lista de clientes</h4>
-    <a class="btn btn-success" href="<?= BASE_URL.'Relatorio/relatorio_clientes' ?>">Clientes</a>
+    <a class="btn cookie-background cookie-background btn-success" href="<?= BASE_URL.'Relatorio/relatorio_clientes' ?>">Clientes</a>
     </div>
     <div class="col-md-4 text-center">
     <h4>Imprimir toda lista de pedidos</h4>
-    <a class="btn btn-success" href="<?= BASE_URL.'Relatorio/relatorio_pedidos' ?>">Pedidos</a>
+    <a class="btn cookie-background  cookie-background btn-success" href="<?= BASE_URL.'Relatorio/relatorio_pedidos' ?>">Pedidos</a>
     </div>
 
     <div class="col-md-4 text-center">
@@ -22,15 +22,28 @@
       <option value='m6'>Ultimos 6 meses</option>
       <option value='y1'>Ultimo ano</option>
     </select>
-    <input type='submit' class="btn btn-success geracsv" value='Gerar' href="#">
+    <input type='submit' class="btn cookie-background cookie-background btn-success geracsv" value='Gerar' href="#">
     </form>
     
+    </div>
 
+
+
+
+    <div class="col-md-12 text-center margin-bt50 mb-4">
+      <hr>
+      <h1>Gráficos</h1>
+    </div>
+    <div class="col-md-2 text-center"></div>
+
+    <div class="col-md-4 text-center">
+      <h4>Clientes por bairro</h4> 
+      <canvas id="myChart2" width="400" height="400"></canvas>
     </div>
 
     <div class="col-md-4 text-center">
-
-    <canvas id="myChart" width="400" height="400"></canvas>
+      <h4>Pedidos por bairro</h4>
+      <canvas id="myChart" width="400" height="400"></canvas>
     </div>
   </div>
 </div>
@@ -42,6 +55,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous" />
         <script>
 var ctx = document.getElementById('myChart').getContext('2d');
+
 var myChart = new Chart(ctx, {
     type: 'pie',
     data: {
@@ -51,17 +65,22 @@ var myChart = new Chart(ctx, {
             '<?= $b->bairro ?>', 
           <?php } ?>
           
-          'Etc'],
+          ],
         datasets: [{
            
-            data: [12, 19, 3, 5, 2, 3],
+          data: [
+              <?php foreach ($bairros as $b) { ?>
+                <?= $b->quantidade ?>, 
+              <?php } ?>
+             ],
+           
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                'rgba(255, 99, 132, 10)',
+                'rgba(54, 162, 235, 10)',
+                'rgba(255, 206, 86, 10)',
+                'rgba(75, 192, 192, 10)',
+                'rgba(153, 102, 255, 10)',
+                'rgba(255, 159, 64, 10)'
             ],
         
             borderWidth: 1
@@ -77,4 +96,56 @@ var myChart = new Chart(ctx, {
         }
     }
 });
+
+
+var ctx2 = document.getElementById('myChart2').getContext('2d');
+
+var myChart2 = new Chart(ctx2, {
+    type: 'pie',
+    data: {
+
+        labels: [
+          <?php foreach ($bairrosCli as $b) { ?>
+            '<?= $b->bairro ?>', 
+          <?php } ?>
+          
+          ],
+        datasets: [{
+           
+          data: [
+              <?php foreach ($bairrosCli as $b) { ?>
+                <?= $b->quantidade ?>, 
+              <?php } ?>
+             ],
+           
+            backgroundColor: [
+                'rgba(255, 99, 132, 10)',
+                'rgba(54, 162, 235, 10)',
+                'rgba(255, 206, 86, 10)',
+                'rgba(75, 192, 192, 10)',
+                'rgba(153, 102, 255, 10)',
+                'rgba(255, 159, 64, 10)'
+            ],
+        
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+
+
+
+
+
+
+
 </script>

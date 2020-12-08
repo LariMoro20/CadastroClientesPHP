@@ -2,10 +2,10 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12 text-center">
-      <h1>Lista de cliente</h1>
+      <h1>Lista de clientes</h1>
     </div>
     <div class="col-md-12 text-center margin-bt20">
-      <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#addModal">
+      <button type="button" class="btn cookie-background btn-primary " data-toggle="modal" data-target="#addModal">
         + Cadastrar Novo
       </button>
       </div>
@@ -14,6 +14,7 @@
         <thead>
           <tr>
             <th scope="col">Foto</th>
+
             <th scope="col">Nome</th>
             <th scope="col">Telefone</th>
             <th scope="col">Estado</th>
@@ -35,7 +36,7 @@
             <td class='td-telefone'><?= $cli->telefone ?></td>
             <td class='td-estado'><?= $cli->estado ?></td>
             <td class='td-cidade'><?= $cli->cidade ?></td>
-            <td class='td-bairro'><?= $cli->bairro ?></td>
+            <td class='td-bairro' bai='<?= $cli->BaiID ?>'><?= $cli->bairro ?></td>
             <td class='td-rua'><?= $cli->rua ?></td>
             <td class='td-numero'><?= $cli->numero ?></td>
             <td><a class='btneditpac' href="#." ><i class="fa fa-pencil-square-o"></i></a></td>
@@ -93,7 +94,13 @@
                    
                     <div class="form-group col-md-6">
                       <label for="bairro">Bairro*</label>
-                      <input type="text" aria-describedby="bairroHelp" name='bairro' class="form-control" id="bairro" placeholder="" required>
+
+
+                      <select aria-describedby="bairroHelp" class="form-control bairro" name='bairro' required>
+                        <?php foreach ($bairros as $bai) { ?>
+                          <option value='<?= $bai->Id ?>'><?= $bai->bairro ?></option>
+                        <?php } ?>
+                      </select>  
                       <small id="bairroHelp" class="form-text text-muted">Informe o bairro</small>
                     </div>
                     <div class="form-group col-md-8">
@@ -167,6 +174,8 @@
                     </div>
                     <div class="form-group col-md-6">
                       <label for="estado">Estado*</label>
+                      
+
                       <input type="text" aria-describedby="estadoHelp" id="estadoInput" name='estado' class="form-control" required>
                       <small id="estadoHelp" class="form-text text-muted">Informe o estado</small>
                     </div>
@@ -178,7 +187,14 @@
                    
                     <div class="form-group col-md-6">
                       <label for="bairro">Bairro*</label>
-                      <input type="text" aria-describedby="bairroHelp" id="bairroInput" name='bairro' class="form-control" required>
+                      <select aria-describedby="bairroHelp" class="form-control bairro" name='bairro' id="bairroInput" required>
+                      <option class='atbai' value='---'>---</option>
+
+                        <?php foreach ($bairros as $bai) { ?>
+                          <option value='<?= $bai->Id ?>'><?= $bai->bairro ?></option>
+                        <?php } ?>
+                      </select>  
+                      
                       <small id="bairroHelp" class="form-text text-muted">Informe o bairro</small>
                     </div>
                     <div class="form-group col-md-8">

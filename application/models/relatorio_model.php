@@ -15,17 +15,14 @@ class relatorio_model extends CI_Model {
 		if($id){
 			$this->db->where('Id', $id);
 		}
+		$this->db->select('clientes.*, bairros.bairro, bairros.Id as BaiID');
+		$this->db->join('bairros', 'bairros.Id = clientes.bairro');
+
 		$Clientes = $this->db->get('clientes')->result();
 		return $Clientes;
 	}
 
-	public function getBairros($id=false){
-		if($id){
-			$this->db->where('Id', $id);
-		}
-		$Clientes = $this->db->get('bairros')->result();
-		return $Clientes;
-	}
+	/**/
 
 	
 	
@@ -42,11 +39,12 @@ class relatorio_model extends CI_Model {
 		if($bairro){
 			$this->db->where('clientes.bairro', $bairro);
 		}
-
 		$this->db->join('clientes', 'clientes.Id = pedidos.id_cliente');
+				$this->db->join('bairros', 'bairros.Id = clientes.bairro');
+
 		$this->db->join('status', 'status.Id = pedidos.status');
 		$this->db->select('pedidos.Id as IdPed');
-		$this->db->select('descricao_pedido, valor, data_pedido, clientes.nome, clientes.endereco, clientes.cidade, clientes.bairro, clientes.estado, status.status');
+		$this->db->select('descricao_pedido, valor, data_pedido, clientes.nome, clientes.endereco, clientes.cidade, bairros.bairro, clientes.estado, status.status');
 		$Pedidos = $this->db->get('pedidos')->result();
 		foreach ($Pedidos as $ped) {
 			$data_pedido = new DateTime($ped->data_pedido);
@@ -78,9 +76,10 @@ class relatorio_model extends CI_Model {
 			$this->db->where('clientes.bairro', $bairro);
 		}
 		$this->db->join('clientes', 'clientes.Id = pedidos.id_cliente');
+		$this->db->join('bairros', 'bairros.Id = clientes.bairro');
 		$this->db->join('status', 'status.Id = pedidos.status');
 		$this->db->select('pedidos.Id as IdPed');
-		$this->db->select('descricao_pedido, valor, data_pedido, clientes.nome, clientes.endereco, clientes.cidade, clientes.bairro, clientes.estado, status.status');
+		$this->db->select('descricao_pedido, valor, data_pedido, clientes.nome, clientes.endereco, clientes.cidade, bairros.bairro, clientes.estado, status.status');
 		$Pedidos = $this->db->get('pedidos')->result();
 		foreach ($Pedidos as $ped) {
 			$data_pedido = new DateTime($ped->data_pedido);
@@ -89,6 +88,40 @@ class relatorio_model extends CI_Model {
 		return $Pedidos;
 	}
 
+
+
+
+	public function getBairros(){
+		/*SELECT  
+		FROM `pedidos` 
+		inner join clientes on clientes.Id=pedidos.id_cliente 
+		INNER JOIN bairros on bairros.Id=clientes.bairro 
+		GROUP by clientes.bairro */
+		$this->db->select('clientes.bairro, bairros.bairro, bairros.Id as bairroiId, count(pedidos.Id) as quantidade ');
+
+		$this->db->join('clientes', 'clientes.Id = pedidos.id_cliente');
+		$this->db->join('bairros', 'bairros.Id = clientes.bairro');
+		$this->db->group_by('clientes.bairro');
+		$bairro = $this->db->get('pedidos')->result();
+		return $bairro;
+	}
+	
+	/*
+	SELECT clientes.bairro, bairros.bairro, count(clientes.Id) as quantidade 
+	FROM clientes 
+	INNER JOIN bairros on bairros.Id=clientes.bairro 
+	GROUP by clientes.bairro 
+	*/
+
+	public function getBairrosClientes(){
+
+		$this->db->select('clientes.bairro, bairros.bairro, count(clientes.Id) as quantidade ');
+
+		$this->db->join('bairros', 'bairros.Id = clientes.bairro');
+		$this->db->group_by('clientes.bairro');
+		$bairro = $this->db->get('clientes')->result();
+		return $bairro;
+	}
 
 
 }

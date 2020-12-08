@@ -16,6 +16,7 @@ class Clientes extends CI_Controller {
 		$data = array(
 			'page_title'=> 'Clientes',
 			'cliente'=>$this->clientes_model->getClientes(),
+			'bairros'=>$this->clientes_model->getBairros(),
 			);
 		$this->load->view('includes/design',$data);
 		$this->load->view('includes/header');
@@ -29,7 +30,7 @@ class Clientes extends CI_Controller {
         $this->form_validation->set_rules('cep', 'cep', 'required|alpha_numeric', FORM_OPTIONS);
         $this->form_validation->set_rules('estado', 'estado', 'required|min_length[2]|max_length[2]', FORM_OPTIONS);
         $this->form_validation->set_rules('cidade', 'cidade', 'required|alpha_numeric_spaces|min_length[3]', FORM_OPTIONS);
-        $this->form_validation->set_rules('bairro', 'bairro', 'required|alpha|min_length[3]', FORM_OPTIONS);
+        $this->form_validation->set_rules('bairro', 'bairro', 'required|numeric', FORM_OPTIONS);
 		$this->form_validation->set_rules('numero', 'numero', 'required|numeric|min_length[1]', FORM_OPTIONS);
 		$this->form_validation->set_rules('rua', 'rua', 'required|alpha|min_length[3]', FORM_OPTIONS);
 		if ($this->form_validation->run() == FALSE){
@@ -71,7 +72,7 @@ class Clientes extends CI_Controller {
         //$this->form_validation->set_rules('cep', 'cep', 'required|alpha_numeric', FORM_OPTIONS);
         $this->form_validation->set_rules('estado', 'estado', 'required|min_length[2]|max_length[2]', FORM_OPTIONS);
         $this->form_validation->set_rules('cidade', 'cidade', 'required|min_length[3]', FORM_OPTIONS);
-        $this->form_validation->set_rules('bairro', 'bairro', 'required|min_length[3]', FORM_OPTIONS);
+        $this->form_validation->set_rules('bairro', 'bairro', 'required|numeric', FORM_OPTIONS);
 		$this->form_validation->set_rules('numero', 'numero', 'required|numeric|min_length[1]', FORM_OPTIONS);
 		$this->form_validation->set_rules('rua', 'rua', 'required|alpha|min_length[3]', FORM_OPTIONS);
 		if ($this->form_validation->run() == FALSE){
