@@ -23,6 +23,11 @@ html, body {
 .cookie-background {
     background-color:#74301f;
 }
+a {
+    color: #74301f;
+    text-decoration: none;
+    background-color: transparent;
+}
 .margin-bt50{
     margin-bottom: 50px;
 }
