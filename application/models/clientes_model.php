@@ -38,6 +38,7 @@ class clientes_model extends CI_Model {
 				'bairro' => utf8_encode($POST['bairro']),
 				'rua' => utf8_encode($POST['rua']),
 				'numero' => utf8_encode($POST['numero']),
+				'cep'=> utf8_encode($POST['cep']),
 				'cidade' => utf8_encode($POST['cidade']),
 				'estado' => utf8_encode($POST['estado']),
 				'endereco' => 'Rua '.utf8_encode($POST['rua']).' nº '.utf8_encode($POST['numero']).', '.utf8_encode($POST['bairro']).' - '.utf8_encode($POST['cidade']).', '.utf8_encode($POST['estado']) ,
@@ -67,6 +68,7 @@ class clientes_model extends CI_Model {
 				'numero' => utf8_encode($POST['numero']),
 				'cidade' => utf8_encode($POST['cidade']),
 				'estado' => utf8_encode($POST['estado']),
+				'cep'=> utf8_encode($POST['cep']),
 				'endereco' => 'Rua '.utf8_encode($POST['rua']).' nº '.utf8_encode($POST['numero']).', '.utf8_encode($POST['bairro']).' - '.utf8_encode($POST['cidade']).', '.utf8_encode($POST['estado']) ,
 				);
 			$this->db->where('Id', $POST['Id']);

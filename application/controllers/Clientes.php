@@ -27,12 +27,12 @@ class Clientes extends CI_Controller {
 	public function addCliente(){
 		$this->form_validation->set_rules('nome', 'Nome', 'required|alpha_numeric_spaces|min_length[3]',FORM_OPTIONS);
         $this->form_validation->set_rules('telefone', 'Telefone', 'required', FORM_OPTIONS);
-        $this->form_validation->set_rules('cep', 'cep', 'required|alpha_numeric', FORM_OPTIONS);
+        //$this->form_validation->set_rules('cep', 'cep', 'required|alpha_numeric', FORM_OPTIONS);
         $this->form_validation->set_rules('estado', 'estado', 'required|min_length[2]|max_length[2]', FORM_OPTIONS);
         $this->form_validation->set_rules('cidade', 'cidade', 'required|alpha_numeric_spaces|min_length[3]', FORM_OPTIONS);
         $this->form_validation->set_rules('bairro', 'bairro', 'required|numeric', FORM_OPTIONS);
 		$this->form_validation->set_rules('numero', 'numero', 'required|numeric|min_length[1]', FORM_OPTIONS);
-		$this->form_validation->set_rules('rua', 'rua', 'required|alpha|min_length[3]', FORM_OPTIONS);
+		$this->form_validation->set_rules('rua', 'rua', 'required|min_length[3]', FORM_OPTIONS);
 		if ($this->form_validation->run() == FALSE){
             $errors = validation_errors();
             echo json_encode(['error'=>$errors]);
@@ -72,9 +72,11 @@ class Clientes extends CI_Controller {
         //$this->form_validation->set_rules('cep', 'cep', 'required|alpha_numeric', FORM_OPTIONS);
         $this->form_validation->set_rules('estado', 'estado', 'required|min_length[2]|max_length[2]', FORM_OPTIONS);
         $this->form_validation->set_rules('cidade', 'cidade', 'required|min_length[3]', FORM_OPTIONS);
-        $this->form_validation->set_rules('bairro', 'bairro', 'required|numeric', FORM_OPTIONS);
+		
+		//$this->form_validation->set_rules('cep', 'CEP', '', FORM_OPTIONS);
+		$this->form_validation->set_rules('bairro', 'bairro', 'required|numeric', FORM_OPTIONS);
 		$this->form_validation->set_rules('numero', 'numero', 'required|numeric|min_length[1]', FORM_OPTIONS);
-		$this->form_validation->set_rules('rua', 'rua', 'required|alpha|min_length[3]', FORM_OPTIONS);
+		$this->form_validation->set_rules('rua', 'rua', 'required|min_length[3]', FORM_OPTIONS);
 		if ($this->form_validation->run() == FALSE){
             $errors = validation_errors();
             echo json_encode(['error'=>$errors]);

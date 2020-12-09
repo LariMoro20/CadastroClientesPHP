@@ -98,6 +98,7 @@ $dados=array(
     'min_length'     => 'O campo %s precisa ser válido.',
     'alpha_numeric' => 'O campo %s aceita apenas letras e números.',
     'numeric'=> 'O campo %s aceita apenas números.',
+    'decimal' => 'O campo %s aceita apenas preço no formato: 0.00',
 );
 defined('FORM_OPTIONS') or define('FORM_OPTIONS',$dados);
 

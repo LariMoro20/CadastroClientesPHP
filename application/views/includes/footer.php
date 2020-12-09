@@ -1,16 +1,12 @@
-
         <footer class='footer clear-top '>
-        <small>© 2020 by<a target="_blank" href="https://github.com/LariMoro20/"> Larissa Moro </a>All rights reserved.</small>
-
+            <small>© 2020 by<a target="_blank" href="https://github.com/LariMoro20/"> Larissa Moro </a>All rights reserved.</small>
         </footer>
         <script src="<?= DESIGN_PATH ?>js/scripts.js"></script>
         <script src="<?= DESIGN_PATH ?>js/CEPValidator.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.22/b-1.6.5/fc-3.3.1/r-2.2.6/datatables.min.css"/>
         <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.22/b-1.6.5/fc-3.3.1/r-2.2.6/datatables.min.js"></script>
         <script>
-
-
-$('form#addPedido').on( 'submit', function (e) { 
+            $('form#addPedido').on( 'submit', function (e) { 
                 e.preventDefault();
                 var formData = new FormData(this);
                 $.ajax({
@@ -58,40 +54,6 @@ $('form#addPedido').on( 'submit', function (e) {
                     }
                 });
             });
-
-            $('.btneditped').on( 'click', function (e) { 
-                var element = $(this);
-                let id=element.closest('tr').attr('idPac');
-            
-                let id_cliente=       element.closest('tr').find('td.td-id_cliente').attr('cli');
-                let nomecli=        element.closest('tr').find('td.td-id_cliente').text();
-      
-
-                let statusid=       element.closest('tr').find('td.td-status').attr('sta');
-                let status=        element.closest('tr').find('td.td-status').text();
-
-                let descricao=        element.closest('tr').find('td.td-descricao').text();
-                let valor=        element.closest('tr').find('td.td-valor').text();
-                let data_pedido=        element.closest('tr').find('td.td-data_pedido').text();
-
-                $('#IdInput').val(id);
-                //Selecionando cliente
-                $('.atcli').val(id_cliente);
-                $('.atcli').text(nomecli);
-                $("#id_cliente option:first").attr('selected','selected');
-                //========================
-                 //Selecionando status
-                $('.atsts').val(statusid);
-                $('.atsts').text(status);
-                $("#status option:first").attr('selected','selected');
-                //========================
-                $('#descricao').val(descricao);
-                $('#valor').val(valor);
-                $('#data_pedido').val(data_pedido);
-                $('#editModal').modal('show');
-            
-            })
-
             $('form#editPedido').on( 'submit', function (e) { 
                     e.preventDefault();
                     var formData = new FormData(this);
@@ -140,7 +102,6 @@ $('form#addPedido').on( 'submit', function (e) {
                     }
                 });
             });
-    
             $('.btnremoveped').on( 'click', function (e) { 
                 e.preventDefault();
                 var element = $(this);
@@ -185,12 +146,7 @@ $('form#addPedido').on( 'submit', function (e) {
                     }
                 });
             });
-
-        
-    //=======================================================================
-
-
-
+            //=======================================================================
             $('form#addCliente').on( 'submit', function (e) { 
                 e.preventDefault();
                 var formData = new FormData(this);
@@ -239,9 +195,6 @@ $('form#addPedido').on( 'submit', function (e) {
                     }
                 });
             });
-    
-        
-
             $('.btnremovecli').on( 'click', function (e) { 
                 e.preventDefault();
                 var element = $(this);
@@ -264,11 +217,6 @@ $('form#addPedido').on( 'submit', function (e) {
                     }
                 });
             });
-
-
-
-
-            
             $('form#editCliente').on( 'submit', function (e) { 
                     e.preventDefault();
                     var formData = new FormData(this);
@@ -315,47 +263,8 @@ $('form#addPedido').on( 'submit', function (e) {
                         }
                     });
             });
-    
-            
-
-
-            $('.btneditpac').on( 'click', function (e) { 
-                var element = $(this);
-                let id=element.closest('tr').attr('idPac');
-            
-                let nome=       element.closest('tr').find('td.td-nome').text();
-                let telefone=        element.closest('tr').find('td.td-telefone').text();
-                let estado=        element.closest('tr').find('td.td-estado').text();
-                let cidade=        element.closest('tr').find('td.td-cidade').text();
-                
-                let numero=   element.closest('tr').find('td.td-numero').text();
-                let rua=   element.closest('tr').find('td.td-rua').text();
-                let image=      element.closest('tr').find('td.td-img img').attr("src");
-            
-
-                let bairroId=       element.closest('tr').find('td.td-bairro').attr('bai');
-                let bairro=        element.closest('tr').find('td.td-bairro').text();
-                $('.atbai').val(bairroId);
-                $('.atbai').text(bairro);
-                $("#bairroInput option:first").attr('selected','selected');
-
-                $('#IdInput').val(id);
-                $('#nomeInput').val(nome);
-                $('#telefoneInput').val(telefone);
-                $('#estadoInput').val(estado);
-                $('#cidadeInput').val(cidade);
-                $('#ruaInput').val(rua);
-                $('#numeroInput').val(numero);
-                $('#fotoInputHiden').val(image.replace('<?= BASE_URL ?>',''));
-                $('#imgspace2').attr("src",image);
-                $('#editModal').modal('show');
-            
-            });
             //============================================
-         
         </script>
-        
         <script src="<?= DESIGN_PATH ?>mask/dist/jquery.mask.min.js"></script>
-    
     </body>
 </html>

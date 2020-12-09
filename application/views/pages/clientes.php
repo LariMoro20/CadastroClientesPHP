@@ -20,6 +20,7 @@
             <th scope="col">Estado</th>
             <th scope="col">Cidade</th>
             <th scope="col">Bairro</th>
+            <th scope="col">CEP</th>
             <th scope="col">Rua</th>
             <th scope="col">Numero</th>       
             
@@ -37,6 +38,7 @@
             <td class='td-estado'><?= $cli->estado ?></td>
             <td class='td-cidade'><?= $cli->cidade ?></td>
             <td class='td-bairro' bai='<?= $cli->BaiID ?>'><?= $cli->bairro ?></td>
+            <td class='td-cep'><?= $cli->cep ?></td>
             <td class='td-rua'><?= $cli->rua ?></td>
             <td class='td-numero'><?= $cli->numero ?></td>
             <td><a class='btneditpac' href="#." ><i class="fa fa-pencil-square-o"></i></a></td>
@@ -79,7 +81,7 @@
                     <div class="form-group col-md-6">
                       <label for="data_nasc">Digite o CEP (para completar campos automaticamente)</label>
                       <input type="text"  name='cep' class="form-control cep" id="cep" placeholder="cep">
-                      <small id="cepHelp" class="form-text text-muted">Somente números!</small>
+                      <small id="cepHelp" class="form-text text-muted">Obs.:A função incluida será usada futuramente (cliente precisaria saber todos os ceps)</small>
                     </div>
                     <div class="form-group col-md-6">
                       <label for="estado">Estado*</label>
@@ -170,7 +172,7 @@
                     <div class="form-group col-md-6">
                       <label for="data_nasc">Digite o CEP(para completar campos automaticamente)</label>
                       <input type="text"  name='cep' id="cepInput"  class="form-control cep" id="cep" placeholder="cep">
-                      <small id="cepHelp" class="form-text text-muted">Somente números!</small>
+                      <small id="cepHelp" class="form-text text-muted">Obs.: A função incluida será usada futuramente (cliente precisaria saber todos os ceps)</small>
                     </div>
                     <div class="form-group col-md-6">
                       <label for="estado">Estado*</label>

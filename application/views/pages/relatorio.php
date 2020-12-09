@@ -38,12 +38,22 @@
 
     <div class="col-md-4 text-center">
       <h4>Clientes por bairro</h4> 
-      <canvas id="myChart2" width="400" height="400"></canvas>
+      <canvas id="clientes" width="400" height="400"></canvas>
     </div>
 
     <div class="col-md-4 text-center">
       <h4>Pedidos por bairro</h4>
-      <canvas id="myChart" width="400" height="400"></canvas>
+      <canvas id="pedidos" width="400" height="400"></canvas>
+    </div>
+
+    <div class="col-md-12 text-center">
+    <hr>
+      <h4>Futuramente aqui, um mapa baseado nos ceps/informações informadas<br> (google maps api agora é pago para usar)</h4>
+      <div id='map' style='width:400px;height:400px;'>
+    <?
+    //https://www.amcharts.com/javascript-maps/
+    ?>
+    </div>
     </div>
   </div>
 </div>
@@ -53,10 +63,15 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.css" integrity="sha512-C7hOmCgGzihKXzyPU/z4nv97W0d9bv4ALuuEbSf6hm93myico9qa0hv4dODThvCsqQUmKmLcJmlpRmCaApr83g==" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js" integrity="sha512-hZf9Qhp3rlDJBvAKvmiG+goaaKRZA6LKUO35oK6EsM0/kjPK32Yw7URqrq3Q+Nvbbt8Usss+IekL7CRn83dYmw==" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous" />
-        <script>
-var ctx = document.getElementById('myChart').getContext('2d');
+       
+       
+       
+       
+       
+       <script>
+var chpedido = document.getElementById('pedidos').getContext('2d');
 
-var myChart = new Chart(ctx, {
+var pedidos = new Chart(chpedido, {
     type: 'pie',
     data: {
 
@@ -98,9 +113,9 @@ var myChart = new Chart(ctx, {
 });
 
 
-var ctx2 = document.getElementById('myChart2').getContext('2d');
+var chcliente = document.getElementById('clientes').getContext('2d');
 
-var myChart2 = new Chart(ctx2, {
+var clientes = new Chart(chcliente, {
     type: 'pie',
     data: {
 
