@@ -17,20 +17,15 @@ class pedidos_model extends CI_Model {
 		}
 		$this->db->join('clientes', 'clientes.Id = pedidos.id_cliente');
 		$this->db->join('status', 'status.Id = pedidos.status');
-
 		$this->db->select('*');
 		$this->db->select('clientes.Id as cliId');
 		$this->db->select('status.Id as id_status');
 		$this->db->select('pedidos.Id as IdPed');
-
 		$Pedidos = $this->db->get('pedidos')->result();
-
 		foreach ($Pedidos as $ped) {
 			$data_pedido = new DateTime($ped->data_pedido);
 			$ped->data_pedido= $data_pedido->format('d/m/Y');
 		}
-
-
 		return $Pedidos;
 	}
 	
@@ -45,7 +40,6 @@ class pedidos_model extends CI_Model {
 				'valor' => $POST['valor'],
 				'descricao_pedido' => $POST['descricao']
 				);
-
 			if($this->db->insert('pedidos', $data)){
 				$Id = $this->db->insert_id();
 				$retorno['msg']='Adicionado com sucesso!';
@@ -62,7 +56,6 @@ class pedidos_model extends CI_Model {
 				$retorno['status']=false;
 				$retorno['id']=null;
 			}
-		
 		return json_encode($retorno);
 	}
 	
@@ -77,7 +70,6 @@ class pedidos_model extends CI_Model {
 				'valor' => $POST['valor'],
 				'descricao_pedido' => $POST['descricao']
 				);
-
 			$this->db->where('Id', $POST['Id']);
 			if($this->db->update('pedidos', $data)){
 				$retorno['msg']='Sucesso!';
@@ -96,6 +88,7 @@ class pedidos_model extends CI_Model {
 		}
 			return json_encode($retorno);
 	}
+	
 	public function deletePedido($id){
 		if($id){
 			$pedido=$this->pedidos_model->getPedidos($id);

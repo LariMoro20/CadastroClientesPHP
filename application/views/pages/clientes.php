@@ -149,26 +149,17 @@
             </div>
             <form  id="editCliente" class='editCliente' action='#' method='post'  enctype='multipart/form-data' >
             <input type="hidden" class="form-control" name='Id' id="IdInput">
-
               <div class="modal-body">
                   <div class="row">
-                   
-                   
-                   
                     <div class="form-group col-md-6">
                       <label for="Nome">Nome completo*</label>
                       <input type="text" class="form-control" name='nome' id="nomeInput" placeholder="Nome do Cliente" required>
                     </div>
-
-
-
                     <div class="form-group col-md-6">
                       <label for="data_nasc">Telefone*</label>
                       <input type="text" autocomplete="off" id="telefoneInput" aria-describedby="telefoneHelp" name='telefone' class="form-control telefone" placeholder="" required>
                       <small id="telefoneHelp" class="form-text text-muted">Exemplo: (00) 00000-0000</small>
                     </div>
-
-
                     <div class="form-group col-md-6">
                       <label for="data_nasc">Digite o CEP(para completar campos automaticamente)</label>
                       <input type="text"  name='cep' id="cepInput"  class="form-control cep" id="cep" placeholder="cep">
@@ -176,8 +167,6 @@
                     </div>
                     <div class="form-group col-md-6">
                       <label for="estado">Estado*</label>
-                      
-
                       <input type="text" aria-describedby="estadoHelp" id="estadoInput" name='estado' class="form-control" required>
                       <small id="estadoHelp" class="form-text text-muted">Informe o estado</small>
                     </div>
@@ -186,17 +175,14 @@
                       <input type="text" aria-describedby="cidadeHelp" id="cidadeInput" name='cidade' class="form-control"  required>
                       <small id="cidadeHelp" class="form-text text-muted">Informe a cidade</small>
                     </div>
-                   
                     <div class="form-group col-md-6">
                       <label for="bairro">Bairro*</label>
                       <select aria-describedby="bairroHelp" class="form-control bairro" name='bairro' id="bairroInput" required>
                       <option class='atbai' value='---'>---</option>
-
                         <?php foreach ($bairros as $bai) { ?>
                           <option value='<?= $bai->Id ?>'><?= $bai->bairro ?></option>
                         <?php } ?>
                       </select>  
-                      
                       <small id="bairroHelp" class="form-text text-muted">Informe o bairro</small>
                     </div>
                     <div class="form-group col-md-8">
@@ -209,10 +195,6 @@
                       <input type="text" aria-describedby="ruaHelp"  id="numeroInput" name='numero' class="form-control"  placeholder="" required>
                       <small id="ruaHelp" class="form-text text-muted">Informe a rua</small>
                     </div>
-
-                
-
-
                     <div class="form-group col-md-12 text-center"><hr>
                       <label for="foto">Foto do cliente</label>
                       <input type="hidden" name="oldFoto" id="fotoInputHiden" >
@@ -220,14 +202,11 @@
                       <small id="fotoHelp" class="form-text text-muted">Favor escolher uma foto de rosto limpo, para fácil identificação</small>
                       <img id="imgspace2"  width="200" height="200" />
                     </div>
-                    
                   </div>
-                  
-                  
               </div>
               <div class="modal-footer">
-                      <input type="submit" class="form-control btn btn-success" id="submit" value='Enviar'>
-                      <a href='#' data-dismiss="modal" class="cancelbtn btn btn-secondary">Cancelar</a>
+                <input type="submit" class="form-control btn btn-success" id="submit" value='Enviar'>
+                <a href='#' data-dismiss="modal" class="cancelbtn btn btn-secondary">Cancelar</a>
               </div>
             </form>
           </div>

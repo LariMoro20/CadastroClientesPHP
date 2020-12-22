@@ -19,9 +19,6 @@ class status_model extends CI_Model {
 		$status = $this->db->get('status')->result();
 		return $status;
 	}
-	
-
-
 }
 	
 ?>

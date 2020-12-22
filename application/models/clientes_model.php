@@ -19,19 +19,10 @@ class clientes_model extends CI_Model {
 		$this->db->select('clientes.*, bairros.bairro, bairros.Id as BaiID');
 		$this->db->join('bairros', 'bairros.Id = clientes.bairro');
 		$Clientes = $this->db->get('clientes')->result();
-
-
-
 		return $Clientes;
 	}
 	
-
-
-	
-
 	public function addClientes($POST){
-
-
 			$data = array(
 				'nome' => utf8_encode($POST['nome']),
 				'telefone' => utf8_encode($POST['telefone']),
@@ -43,7 +34,6 @@ class clientes_model extends CI_Model {
 				'estado' => utf8_encode($POST['estado']),
 				'endereco' => 'Rua '.utf8_encode($POST['rua']).' nº '.utf8_encode($POST['numero']).', '.utf8_encode($POST['bairro']).' - '.utf8_encode($POST['cidade']).', '.utf8_encode($POST['estado']) ,
 				);
-
 			if($this->db->insert('clientes', $data)){
 				$Id = $this->db->insert_id();
 				$retorno['msg']='Adicionado com sucesso!';
@@ -82,20 +72,16 @@ class clientes_model extends CI_Model {
 				$retorno['status']=false;
 				$retorno['id']=null;
 			}
-	
 			return json_encode($retorno);
-
 	}
+
 	public function deleteCliente($id){
 		if($id){
 			$id=$id['id'];
-			
 			$cliente=$this->clientes_model->getClientes($id);
 			$foto=$cliente[0]->foto;
-			
 			$path = dirname(dirname(dirname(__FILE__)));
 			$path=$path.'/'.$foto;
-		
 			unlink($path);
 			$this->db->where('Id', $id);
         	if($this->db->delete('clientes')){
@@ -105,7 +91,6 @@ class clientes_model extends CI_Model {
 				$retorno['msg']='Erro ao deletar!';
 				$retorno['status']=false;
 			}
-			
 		}else{
 			$retorno['msg']='Cliente não informado!';
 			$retorno['status']=false;
@@ -134,7 +119,6 @@ class clientes_model extends CI_Model {
 	public function validaDados($dados){
 		$retorno['status'] 	= true;
 		$retorno['msg']		= 'Dados corretos!';
-
 		if($this->clientes_model->validaData($dados['data_nasc'], 'd/m/Y')){
 			if($this->clientes_model->validaCPF($dados['CPF'])){
 			}else{

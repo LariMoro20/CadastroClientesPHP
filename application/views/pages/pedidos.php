@@ -44,7 +44,6 @@
         <?php } ?>
         </tbody>
       </table>
-
       <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -55,20 +54,17 @@
               </button>
             </div>
             <form  id="addPedido" class='addPedido' action='#' method='post' name='addPedido' enctype='multipart/form-data' >
-
               <div class="modal-body">
                   <div class="row">
                     <div class="form-group col-md-6">
                       <label for="id_clientfe">Cliente*</label>
                       <select autocomplete="off" aria-describedby="id_clienteHelp" class="form-control" name='id_cliente' required>
-                        
                         <?php foreach ($clientes as $cli) { ?>
                           <option value='<?= $cli->Id ?>'><?= $cli->nome ?></option>
                         <?php } ?>
                       </select>                      
                       <small id="id_clienteHelp" class="form-text text-muted">Cliente</small>
                     </div>
-
                     <div class="form-group col-md-6">
                       <label for="data_nasc">Status*</label>
                       <select aria-describedby="statusHelp" class="form-control status" name='status' required>
@@ -78,7 +74,6 @@
                       </select>                       
                       <small id="statusHelp" class="form-text text-muted">Status</small>
                     </div>
-
                     <div class="form-group col-md-6">
                       <label for="data_nasc">Valor</label>
                       <input type="text"  name='valor' class="form-control valor" id="" placeholder="valor">
@@ -89,26 +84,21 @@
                       <input type="text" aria-describedby="data_pedidoHelp" name='data_pedido' class="form-control datacheck" required>
                       <small id="data_pedidoHelp" class="form-text text-muted">Data do pedido</small>
                     </div>
-
                     <div class="form-group col-md-12">
                       <label for="descricao">Descrição*</label>
                       <textarea type="text" aria-describedby="descricaoHelp" name='descricao' class="form-control" id="" placeholder="" required> </textarea>
                       <small id="descricaoHelp" class="form-text text-muted">descricao</small>
-                    </div>
-                    
-                  </div>
-                  
-                  
+                    </div>                    
+                  </div>                               
               </div>
               <div class="modal-footer">
-                      <input type="submit" class="form-control btn btn-success" id="submit" value='Enviar'>
-                      <a href='#' data-dismiss="modal" class="cancelbtn btn btn-secondary">Cancelar</a>
+                <input type="submit" class="form-control btn btn-success" id="submit" value='Enviar'>
+                <a href='#' data-dismiss="modal" class="cancelbtn btn btn-secondary">Cancelar</a>
               </div>
             </form>
           </div>
         </div>
       </div>
-
       <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -120,10 +110,8 @@
             </div>
             <form  id="editPedido" class='editPedido' action='#' method='post'  enctype='multipart/form-data' >
             <input type="hidden" class="form-control" name='Id' id="IdInput">
-
               <div class="modal-body">
-                  <div class="row">
-                   
+                  <div class="row">                 
                   <div class="form-group col-md-6">
                       <label for="id_cliente">Cliente*</label>
                       <select aria-describedby="id_clienteHelp" id='id_cliente' class="form-control" name='id_cliente' required>
@@ -134,23 +122,16 @@
                       </select>                         
                       <small id="id_clienteHelp" class="form-text text-muted">Cliente</small>
                     </div>
-
                     <div class="form-group col-md-6">
                       <label for="data_nasc">Status*</label>
-                      
-
- 
                       <select aria-describedby="statusHelp" class="form-control status" name='status'  id="status" required>
                       <option class='atsts' value='---'>---</option>
-
                         <?php foreach ($status as $st) { ?>
                           <option value='<?= $st->Id ?>'><?= $st->status ?></option>
                         <?php } ?>
-                      </select>   
-                      
+                      </select>                         
                       <small id="statusHelp" class="form-text text-muted">Status</small>
                     </div>
-
                     <div class="form-group col-md-6">
                       <label for="data_nasc">Valor</label>
                       <input type="text"  name='valor' class="form-control valor" id="valor" placeholder="valor">
@@ -161,21 +142,12 @@
                       <input type="text" aria-describedby="data_pedidoHelp" name='data_pedido' class="form-control datacheck" id="data_pedido" placeholder="" required>
                       <small id="data_pedidoHelp" class="form-text text-muted">Data do pedido</small>
                     </div>
-
                     <div class="form-group col-md-12">
                       <label for="descricao">Descrição*</label>
                       <textarea type="text" aria-describedby="descricaoHelp" name='descricao' class="form-control" id="descricao" placeholder="" required> </textarea>
                       <small id="descricaoHelp" class="form-text text-muted">descricao</small>
-                    </div>
-                   
-
-                
-
-
-                    
-                  </div>
-                  
-                  
+                    </div> 
+                  </div>      
               </div>
               <div class="modal-footer">
                       <input type="submit" class="form-control btn btn-success" id="submit" value='Enviar'>

@@ -11,6 +11,7 @@ class relatorio_model extends CI_Model {
 		if(isset($_POST)){ array_walk_recursive($_POST, function(&$v, $k) {$v = (utf8_decode($v));}); }
 		if(isset($_GET)){ array_walk_recursive($_GET, function(&$v, $k) {$v = mysqli_real_escape_string($this->db->conn_id,utf8_decode($v));}); }
 	}
+	
 	public function getClientesForCSV($id=false){
 		if($id){
 			$this->db->where('Id', $id);
@@ -22,10 +23,6 @@ class relatorio_model extends CI_Model {
 		return $Clientes;
 	}
 
-	/**/
-
-	
-	
 	public function getPedidosForCSV($id=false, $mes=false, $ano=false, $bairro=false){
 		if($id){
 			$this->db->where('pedidos.Id', $id);
@@ -40,8 +37,7 @@ class relatorio_model extends CI_Model {
 			$this->db->where('clientes.bairro', $bairro);
 		}
 		$this->db->join('clientes', 'clientes.Id = pedidos.id_cliente');
-				$this->db->join('bairros', 'bairros.Id = clientes.bairro');
-
+		$this->db->join('bairros', 'bairros.Id = clientes.bairro');
 		$this->db->join('status', 'status.Id = pedidos.status');
 		$this->db->select('pedidos.Id as IdPed');
 		$this->db->select('descricao_pedido, valor, data_pedido, clientes.nome, clientes.endereco, clientes.cidade, bairros.bairro, clientes.estado, status.status');
@@ -92,31 +88,16 @@ class relatorio_model extends CI_Model {
 
 
 	public function getBairros(){
-		/*SELECT  
-		FROM `pedidos` 
-		inner join clientes on clientes.Id=pedidos.id_cliente 
-		INNER JOIN bairros on bairros.Id=clientes.bairro 
-		GROUP by clientes.bairro */
 		$this->db->select('clientes.bairro, bairros.bairro, bairros.Id as bairroiId, count(pedidos.Id) as quantidade ');
-
 		$this->db->join('clientes', 'clientes.Id = pedidos.id_cliente');
 		$this->db->join('bairros', 'bairros.Id = clientes.bairro');
 		$this->db->group_by('clientes.bairro');
 		$bairro = $this->db->get('pedidos')->result();
 		return $bairro;
 	}
-	
-	/*
-	SELECT clientes.bairro, bairros.bairro, count(clientes.Id) as quantidade 
-	FROM clientes 
-	INNER JOIN bairros on bairros.Id=clientes.bairro 
-	GROUP by clientes.bairro 
-	*/
 
 	public function getBairrosClientes(){
-
 		$this->db->select('clientes.bairro, bairros.bairro, count(clientes.Id) as quantidade ');
-
 		$this->db->join('bairros', 'bairros.Id = clientes.bairro');
 		$this->db->group_by('clientes.bairro');
 		$bairro = $this->db->get('clientes')->result();

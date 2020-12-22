@@ -1,0 +1,13 @@
+Olá, segue meu projeto de teste!
+Infelizmente fiquei devendo o mapa de calor, em contra partida coloquei alguns gráficos que poderiam atender a solicitação.
+Irei estudar mais a fundo essa parte dos mapas de calor, pois não consegui implementar em tempo habil. Porém acredito que poderia
+aprender facilmente com vocês.
+
+Utilizei o framework PHP Codeigniter pois é o que estou habituada a trabalhar, e que pude utilizar no tempo disponível.
+Sobre os ceps coloquei uma api que faz a consulta e retorna os dados completos. Como não imaginei ser o perfil do cliente
+saber sobre cada cep ou ter essa informação, deixei de fora. Mas coloquei pois acredito ser extremamente util e servir como
+malhoria para o software. 
+Agradeço a oportunidade e aguardo o retorno!
+
+Att. 
+Larissa Moro S. dos Santos 
